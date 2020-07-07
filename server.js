@@ -1,0 +1,65 @@
+const express = require('express')
+const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+
+const PORT = process.env.PORT || 4000
+const app = express()
+const connexionRoutes = express.Router()
+
+const mongoDB = 'mongodb://127.0.0.1/connexions';
+mongoose.connect(mongoDB || process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+
+const db = mongoose.connection;
+db.once("open", ()=> {
+    console.log("MongoDB connection establishd")
+})
+
+let Connexion = require("./Connexions.model")
+
+app.use(bodyParser.json())
+
+connexionRoutes.route("/").get((req, res) => {
+    Connexion.find((err, connexion) => {
+        if(!connexion){
+            res.status(400)
+            console.log("Database not found")
+        }
+        else{
+           return res.json(connexion)
+        }
+    })
+})
+
+connexionRoutes.route("/add").post((req, res) => {
+    let connexion = new Connexion(req.body)
+
+    connexion.save()
+    .then((connexion) => {
+        res.status(200).send("Connexion added successfully")
+    })
+    .catch(err => {
+        res.status(400).send("Connexion was not added")
+        console.log("Connexion was not added")
+        console.log(err)
+    })
+})
+
+connexionRoutes.route("/single/:id").get((req, res) => {
+    let id =  req.params.id
+
+    Connexion.findById(id, (err, connexion) => {
+        if(!connexion){
+            res.status(400).send("Connexion unavailable")
+            // console.log(err)
+            console.log("Connexion unavailable")
+        }
+        else{
+            return res.json(connexion)
+        }
+    })
+})
+
+app.use("/connexions", connexionRoutes)
+app.listen(PORT, () => {
+    console.log("Database running in PORT:" + PORT)
+})
