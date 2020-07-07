@@ -14,7 +14,7 @@ function Play() {
   }, [allConnexions]);
 
   if (allConnexions[number]) {
-    console.log(allConnexions[number])
+    // console.log(allConnexions[number])
     clue = allConnexions[number].clue
     images = allConnexions[number].links.map((current, index) => {
       return <img className="play-images" src={current} key={index} alt="img" />;
