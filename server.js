@@ -44,21 +44,6 @@ connexionRoutes.route("/add").post((req, res) => {
     })
 })
 
-connexionRoutes.route("/single/:id").get((req, res) => {
-    let id =  req.params.id
-
-    Connexion.findById(id, (err, connexion) => {
-        if(!connexion){
-            res.status(400).send("Connexion unavailable")
-            // console.log(err)
-            console.log("Connexion unavailable")
-        }
-        else{
-            return res.json(connexion)
-        }
-    })
-})
-
 if (process.env.NODE_ENV === "production") {
     app.use(express.static("client/build"));
   
@@ -66,6 +51,16 @@ if (process.env.NODE_ENV === "production") {
       res.sendFile(path.join(__dirname, "client", "build", "index.html"));
     });
   }
+
+  app.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    next();
+  });
+  
+  app.use(express.urlencoded({
+    extended: false
+  }));
+  
 
 app.use("/connexions", connexionRoutes)
 app.listen(PORT, () => {
