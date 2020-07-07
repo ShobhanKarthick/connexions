@@ -3,7 +3,8 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const path = require('path')
 
-const PORT = process.env.PORT || 4000
+const PORT = process.env.PORT || 4000;
+
 const app = express()
 const connexionRoutes = express.Router()
 
@@ -15,14 +16,15 @@ db.once("open", ()=> {
     console.log("MongoDB connection establishd")
 })
 
-app.use(bodyParser.json())
-
 let Connexion = require("./Connexions.model")
+
+app.use(bodyParser.json())
 
 connexionRoutes.route("/").get((req, res) => {
     Connexion.find((err, connexion) => {
         if(!connexion){
             res.status(400)
+            console.log(err)
             console.log("Database not found")
         }
         else{
@@ -45,6 +47,9 @@ connexionRoutes.route("/add").post((req, res) => {
     })
 })
 
+app.use("/connexions", connexionRoutes)
+
+
 if (process.env.NODE_ENV === "production") {
     app.use(express.static("client/build"));
   
@@ -62,8 +67,7 @@ if (process.env.NODE_ENV === "production") {
     extended: false
   }));
   
-app.use("/connexions", connexionRoutes)
 
 app.listen(PORT, () => {
-    console.log("Database running in PORT:" + PORT)
-})
+    console.log("MongoDB running on PORT: " + PORT);
+  });
