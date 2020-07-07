@@ -5,8 +5,9 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "concurrently \"cd client && yarn install && yarn run build\" \"node server.js\"",
+    "dev": "nodemon server.js",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
-
   },
   "keywords": [],
   "author": "",
@@ -18,5 +19,8 @@
   },
   "engines": {
     "node": "13.12.0"
+  },
+  "devDependencies": {
+    "dotenv": "^8.2.0"
   }
 }

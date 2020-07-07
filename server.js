@@ -7,16 +7,16 @@ const app = express()
 const connexionRoutes = express.Router()
 
 const mongoDB = 'mongodb://127.0.0.1/connexions';
-mongoose.connect(mongoDB || process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(process.env.MONGODB_URI || mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
 
 const db = mongoose.connection;
 db.once("open", ()=> {
     console.log("MongoDB connection establishd")
 })
 
-let Connexion = require("./Connexions.model")
-
 app.use(bodyParser.json())
+
+let Connexion = require("./Connexions.model")
 
 connexionRoutes.route("/").get((req, res) => {
     Connexion.find((err, connexion) => {
@@ -61,8 +61,8 @@ if (process.env.NODE_ENV === "production") {
     extended: false
   }));
   
-
 app.use("/connexions", connexionRoutes)
+
 app.listen(PORT, () => {
     console.log("Database running in PORT:" + PORT)
 })
