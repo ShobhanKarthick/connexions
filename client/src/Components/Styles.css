@@ -110,9 +110,12 @@ html, body{
 
     .home-nav{
         justify-content: space-evenly;
-        background-color: #111111;
+        background-color: #4ca541a9;
+        color: #ffffff;
+        padding: 15px 25px;
     }
     .home-nav > a{
+        font-size: 22px;
         margin: 0;
     } 
 
