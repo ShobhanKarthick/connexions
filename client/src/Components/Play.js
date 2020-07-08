@@ -50,16 +50,30 @@ function Play() {
   const displayAnswer = (event) => {
     event.preventDefault();
     document.getElementById("answer-display").style.display = "block"
+    document.getElementById("bg-overlay").style.display = "block"
   };
 
   const postAnswerDisplay = () => {
     document.getElementById("answer-display").style.display = "none"
+    document.getElementById("bg-overlay").style.display = "none"
     setNumber(number + 1);
     setUserAnswer('')
   }
 
+  const lastPage = () => {
+    if(allConnexions[number-1]){
+      if(number === allConnexions.length) {
+        document.getElementById("play-sub-head").style.display = "none"
+        document.getElementById("play-answer").style.display = "none"
+        document.getElementById("connect").style.display = "none"
+        return <h1 style={{color: "#ffffff"}}>That's it for now we'll add more!!!</h1>
+      }
+    }
+  }
+
   return (
     <div className="play-page">
+    <div className="bg-overlay" id="bg-overlay" />
     <div id="toast-correct" className="toast-correct">Bravo! Your answer is correct</div>
     <div id="toast-incorrect" className="toast-incorrect">Sorry! Your answer is wrong</div>
     <div id="answer-display" className="answer-display">
@@ -77,20 +91,24 @@ function Play() {
       {number < allConnexions.length && (
         <h1 className="play-page-head">Connexion #{number + 1}</h1>
       )}
-      <h1 className="play-sub-head">Clue: {clue}</h1>
+      <h1 id="play-sub-head" className="play-sub-head">Clue: {clue}</h1>
 
       <div id="imgLinks" className="play-images-container">{images}</div>
       <form className="play-form" onSubmit={submitHandler}>
         <input
+          id="play-answer"
           className="play-answer"
           type="text"
           placeholder="Enter you answer"
           value={userAnswer}
           onChange={userAnswerHandler}
+          title="Enter your answer!"
+          required
         />
         <div id="button-container"style={!(number + 1 < allConnexions.length)?{flexDirection: "column", width:"100%", display:"flex", justifyContent: "center", alignItems: "center"}:{width:"100%", display:"flex", justifyContent: "center", alignItems: "center"}}>
         <button id="connect" className="answer-button" type="submit">CONNECT</button>
-        {number + 1 < allConnexions.length ? (<button id="show-answer" className="answer-button" onClick={displayAnswer}>SHOW ANSWER</button>) : (<h3 style={{marginTop: "20px"}} className="play-sub-head">That's it for now we'll add more!!!</h3>)}
+        {number < allConnexions.length && (<button id="show-answer" className="answer-button" onClick={displayAnswer}>SHOW ANSWER</button>)}
+        {lastPage()}
         </div>
       </form>
     </div>

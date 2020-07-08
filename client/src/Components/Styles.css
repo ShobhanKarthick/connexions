@@ -264,6 +264,14 @@ html, body{
     }
 }
 
+.bg-overlay{
+    display: none;
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.6);
+    height: 100vh;
+    width: 100vw;
+}
+
 .play-page{
     background-image:linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('./Images/bg5.jpg');
     background-position: center;
@@ -408,6 +416,7 @@ html, body{
     font-family: Nexa-regular;
     font-size: 20px;
     border-radius: 5px;
+    z-index: 1;
 }
 
 
