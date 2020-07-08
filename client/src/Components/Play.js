@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import {Link} from "react-router-dom"
 import axios from "axios";
 
 function Play() {
@@ -73,6 +74,10 @@ function Play() {
 
   return (
     <div className="play-page">
+    <div className="home-nav">
+    <Link to="/about">ABOUT US</Link>
+    <Link to="/">HOME</Link>
+    </div>
     <div className="bg-overlay" id="bg-overlay" />
     <div id="toast-correct" className="toast-correct">Bravo! Your answer is correct</div>
     <div id="toast-incorrect" className="toast-incorrect">Sorry! Your answer is wrong</div>
@@ -83,7 +88,7 @@ function Play() {
     <div onClick={postAnswerDisplay} style={{color: "#0074d9", float: "right", cursor: "pointer"}}>OHH DAMN!</div>
     </div>
     
-
+    <div style={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", marginTop: "80px"}}>
       {number === 0 && (
         <h1 className="play-page-head">Let's Connect... Shall we ?!</h1>
       )}
@@ -92,6 +97,7 @@ function Play() {
         <h1 className="play-page-head">Connexion #{number + 1}</h1>
       )}
       <h1 id="play-sub-head" className="play-sub-head">Clue: {clue}</h1>
+      </div>
 
       <div id="imgLinks" className="play-images-container">{images}</div>
       <form className="play-form" onSubmit={submitHandler}>

@@ -56,6 +56,8 @@ html, body{
 }
 
 .home-nav{
+    position: absolute;
+    top: 0;
     display: flex;
     flex-direction: row-reverse;
     align-items: center;
@@ -108,6 +110,7 @@ html, body{
 
     .home-nav{
         justify-content: space-evenly;
+        background-color: #111111;
     }
     .home-nav > a{
         margin: 0;
@@ -123,7 +126,7 @@ html, body{
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    /* padding: 30px; */
+    justify-content: center;
     padding-left: 0;
     box-sizing: border-box;
 }
@@ -155,9 +158,10 @@ html, body{
 
 @media only screen and (max-width:600px){
 .about-head{
+    margin: 0;
+    margin-top: 90px;
     width: 100%;
     text-align: center;
-    margin: 0;
 }
 
 .about-desc{
@@ -267,9 +271,11 @@ html, body{
 .bg-overlay{
     display: none;
     position: fixed;
+    top: 0;
+    left: 0;
     background-color: rgba(0, 0, 0, 0.6);
-    height: 100vh;
-    width: 100vw;
+    height: 100%;
+    width: 100%;
 }
 
 .play-page{
@@ -284,6 +290,7 @@ html, body{
     justify-content: center;
     box-sizing: border-box;
     padding: 15px;
+    padding-top: 0;
 }
 
 .play-page-head {
@@ -408,6 +415,9 @@ html, body{
 .answer-display{
     display: none;
     position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     background-color: #111111;
     width: 320px;
     color: #ffffff;
