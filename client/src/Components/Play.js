@@ -17,10 +17,10 @@ function Play() {
     clue = allConnexions[number].clue
     images = allConnexions[number].links.map((current, index) => {
       return (
-        <React.Fragment>
-        <div className="play-images-number">{index+1}</div>
+        <div className="single-image-container">
         <img className="play-images" src={current} key={index} alt="img" />
-        </React.Fragment>
+        <div className="play-images-number">{index+1}</div>
+        </div>
         )
     });
   }
@@ -35,16 +35,15 @@ function Play() {
     if (
       allConnexions[number].answer.toUpperCase() === userAnswer.toUpperCase()
     ) {
-      // alert("Bravo! The answer is correct"); // put a toast here
       document.getElementById('toast-correct').style.display = "block";
-      window.setTimeout(function() { document.getElementById('toast-correct').style.display = "none"; }, 2500);
+      window.setTimeout(function() { document.getElementById('toast-correct').style.display = "none"; }, 300);
 
       setNumber(number + 1);
       setUserAnswer("");
 
     } else {
       document.getElementById('toast-incorrect').style.display = "block";
-      window.setTimeout(function() { document.getElementById('toast-incorrect').style.display = "none"; }, 2500)
+      window.setTimeout(function() { document.getElementById('toast-incorrect').style.display = "none"; }, 3000)
     }
   };
 

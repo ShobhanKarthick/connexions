@@ -295,9 +295,20 @@ html, body{
     flex-wrap: wrap;
 }
 
-.play-images{
-    padding: 10px;
+.single-image-container{
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     width: 20%;
+    box-sizing: border-box;
+    padding: 15px;
+    padding-bottom: 20px;
+}
+
+.play-images{
+    width: 100%;
+    height: 100%;
     object-fit: cover;
     box-sizing: border-box;
 }
@@ -336,6 +347,8 @@ html, body{
 
 .play-images-number{
     padding-top: 10px;
+    padding-bottom: 10px;
+    width: 100%;
     color: #ffffff;
     font-family: Nexa-Regular;
     text-align: center;
@@ -349,9 +362,10 @@ html, body{
         font-size: 25px;
     }
 
-    .play-images{
-        width: 42%;
+    .single-image-container{
+        width: 45%;
         padding: 5px;
+        padding-bottom: 15px;
     }
     
     .play-answer{
