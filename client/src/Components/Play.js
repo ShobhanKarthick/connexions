@@ -36,7 +36,7 @@ function Play() {
       allConnexions[number].answer.toUpperCase() === userAnswer.toUpperCase()
     ) {
       document.getElementById('toast-correct').style.display = "block";
-      window.setTimeout(function() { document.getElementById('toast-correct').style.display = "none"; }, 300);
+      window.setTimeout(function() { document.getElementById('toast-correct').style.display = "none"; }, 3000);
 
       setNumber(number + 1);
       setUserAnswer("");
@@ -49,15 +49,26 @@ function Play() {
 
   const displayAnswer = (event) => {
     event.preventDefault();
-    alert("The answer is " + allConnexions[number].answer);
+    document.getElementById("answer-display").style.display = "block"
+  };
+
+  const postAnswerDisplay = () => {
+    document.getElementById("answer-display").style.display = "none"
     setNumber(number + 1);
     setUserAnswer('')
-  };
+  }
 
   return (
     <div className="play-page">
     <div id="toast-correct" className="toast-correct">Bravo! Your answer is correct</div>
     <div id="toast-incorrect" className="toast-incorrect">Sorry! Your answer is wrong</div>
+    <div id="answer-display" className="answer-display">
+    <div>Connexion Genius is laughing at you!</div><br />
+    <span>It's </span> <span style={{fontFamily: "Nexa-Bold"}}> {allConnexions[number] && allConnexions[number].answer}</span>
+    <br /><br />
+    <div onClick={postAnswerDisplay} style={{color: "#0074d9", float: "right", cursor: "pointer"}}>OHH DAMN!</div>
+    </div>
+    
 
       {number === 0 && (
         <h1 className="play-page-head">Let's Connect... Shall we ?!</h1>
@@ -78,8 +89,8 @@ function Play() {
           onChange={userAnswerHandler}
         />
         <div id="button-container"style={!(number + 1 < allConnexions.length)?{flexDirection: "column", width:"100%", display:"flex", justifyContent: "center", alignItems: "center"}:{width:"100%", display:"flex", justifyContent: "center", alignItems: "center"}}>
-        <button className="answer-button" style={{width: "150px", marginRight: "10px" }} type="submit">CONNECT</button>
-        {number + 1 < allConnexions.length ? (<button className="answer-button" style={{width: "250px", }} onClick={displayAnswer}>SHOW ANSWER</button>) : (<h3 style={{marginTop: "20px"}} className="play-sub-head">That's it for now we'll add more!!!</h3>)}
+        <button id="connect" className="answer-button" type="submit">CONNECT</button>
+        {number + 1 < allConnexions.length ? (<button id="show-answer" className="answer-button" onClick={displayAnswer}>SHOW ANSWER</button>) : (<h3 style={{marginTop: "20px"}} className="play-sub-head">That's it for now we'll add more!!!</h3>)}
         </div>
       </form>
     </div>

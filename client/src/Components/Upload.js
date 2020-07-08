@@ -65,6 +65,7 @@ function Upload() {
       <form className="upload-form" id="upload-form" onSubmit={submitHandler}>
         <input
           style={{ marginBottom: "20px" }}
+          id="clue-input"
           className="upload-input"
           type="text"
           value={clue}
@@ -74,6 +75,7 @@ function Upload() {
         />
         <input
           style={{ marginBottom: "20px" }}
+          id="answer-input"
           className="upload-input"
           type="text"
           value={answer}
