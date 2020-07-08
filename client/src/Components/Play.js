@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Menu, Close } from '@material-ui/icons'
 import {Link} from "react-router-dom"
 import axios from "axios";
 
@@ -72,11 +73,28 @@ function Play() {
     }
   }
 
+  const open = () =>{
+    document.getElementById("home-nav").style.display = "flex"
+}
+
+const close = () =>{
+    document.getElementById("home-nav").style.display = "none"
+}
+
   return (
     <div className="play-page">
-    <div className="home-nav">
-    <Link to="/about">ABOUT US</Link>
+    <div className="head-container">
+    <div style={{width: "100%", boxSizing: "border-box"}}>
+    <h1 id="home-head" className="home-head">CONNEXIONS</h1>
+    <p style={{width: "fit-content", margin: 0, }} >Play</p>
+    </div>
+    <Menu onClick={open} style={{color: "#ffffff", fontSize: "40px",}} />
+    </div>
+    <div id="home-nav" className="home-nav">
+    <Close onClick={close} style={{color: "#ffffff", fontSize: "30px", alignSelf: "flex-end"}} />
     <Link to="/">HOME</Link>
+    <Link to="/howtoplay">HOW TO PLAY</Link>
+    <Link to="/about">ABOUT US</Link>
     </div>
     <div className="bg-overlay" id="bg-overlay" />
     <div id="toast-correct" className="toast-correct">Bravo! Your answer is correct</div>
@@ -88,7 +106,7 @@ function Play() {
     <div onClick={postAnswerDisplay} style={{color: "#0074d9", float: "right", cursor: "pointer"}}>OHH DAMN!</div>
     </div>
     
-    <div style={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", marginTop: "80px"}}>
+    <div style={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", }}>
       {number === 0 && (
         <h1 className="play-page-head">Let's Connect... Shall we ?!</h1>
       )}

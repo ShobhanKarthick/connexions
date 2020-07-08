@@ -8,6 +8,8 @@ html, body{
   
   p{
     font-family: Nexa-Regular;
+    font-size: 20px;
+    color: #ffffff;
   }
   
   a {
@@ -45,6 +47,19 @@ html, body{
     font-size: 60px;
     margin: 0;
     color: #ffffff;
+    width: fit-content;
+}
+
+#home-head{
+    font-size: 40px;
+}
+
+.head-container{
+    display: flex; 
+    width: 100%;
+    padding: 25px;
+    justify-content: space-between;
+    box-sizing: border-box;
 }
 
 .home-subhead{
@@ -56,21 +71,33 @@ html, body{
 }
 
 .home-nav{
-    position: absolute;
+    position: fixed;
+    z-index: 1;
     top: 0;
+    right: 0;
     display: flex;
-    flex-direction: row-reverse;
+    flex-direction: column;
     align-items: center;
-    width: 100%;
+    width: 22%;
     padding: 25px;
     box-sizing: border-box;
+    align-self: flex-end;
+    padding: 20px;
+    padding-left: 45px;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.95);
+}
+
+#home-nav{
+    display: none;
 }
 
 .home-nav > a {
     font-family: Nexa-Bold;
     font-size: 25px;
     color: #ffffff;
-    margin-right: 20px;
+    align-self: flex-start;
+    margin-top: 30px;
 }
 
 .home-nav > a:hover{
@@ -87,6 +114,14 @@ html, body{
     align-items: center;
 }
 
+.button-container-home{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .home-play-button{
     width: 120px;
     margin-top: 30px;
@@ -99,25 +134,42 @@ html, body{
     border-radius: 35px;
 }
 
+.home-howtoplay-button{
+    width: 200px;
+    margin-top: 30px;
+    text-align: center;
+    font-family: Nexa-Bold;
+    font-size: 25px;
+    padding: 10px;
+    background-color: #ffffff12;
+    color: #4ca541;
+    border-color: #4ca541;
+    border-width: 5px;
+    border-style: solid;
+    border-radius: 35px;
+}
+
 @media only screen and (max-width:600px){
     .home-head{
         font-size: 35px;
     }
+
     .home-subhead{
         font-size: 25px;
         letter-spacing: normal;
     }
 
     .home-nav{
-        justify-content: space-evenly;
-        background-color: #4ca541a9;
-        color: #ffffff;
-        padding: 15px 25px;
+        width: 100%;
     }
     .home-nav > a{
         font-size: 22px;
-        margin: 0;
+        align-self: center;
     } 
+
+    .button-container-home{
+        flex-direction: column;
+    }
 
 }
 
@@ -131,6 +183,7 @@ html, body{
     align-items: center;
     flex-direction: column;
     box-sizing: border-box;
+    padding-bottom: 10px;
 }
 
 .about-container{
@@ -141,7 +194,6 @@ html, body{
     border-style: solid;
     border-width: 3px;
     width: 80%;
-    margin-top: 80px;
     padding: 40px;
     box-sizing: border-box;
 }
@@ -198,10 +250,6 @@ html, body{
 
 
 @media only screen and (max-width:600px){
-
-.about-us{
-    padding-bottom: 10px;
-}
 
 .about-head{
     margin: 0;
@@ -365,8 +413,8 @@ html, body{
     align-items: center;
     justify-content: center;
     box-sizing: border-box;
-    padding: 15px;
-    padding-top: 0;
+    /* padding: 15px; */
+    padding-bottom: 10px;
 }
 
 .play-page-head {
@@ -553,6 +601,71 @@ html, body{
 
     #show-answer{
         width: 200px;
+    }
+}
+
+.howtoplay{
+    background-color: #4ca541;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    padding-bottom: 10px;
+}
+
+#howtolinks:hover{
+    color: #ffffff;
+}
+
+.steps-container{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-evenly;
+    align-content: center;
+    padding: 0 30px;
+    box-sizing: border-box;
+}
+
+.howto-iframe{
+    border: 0;
+    height: 80vh;
+    width: 30vw;
+}
+
+.howto-steps{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 15px;
+    box-sizing: border-box;
+}
+
+.howto-steps > h1, .howto-steps > h2{
+    background-color: #06060c99;
+    width: fit-content;
+    padding: 10px ;
+}
+
+
+
+@media only screen and (max-width:600px){
+    .steps-container{
+        flex-direction: column;
+        padding: 0 10px;
+
+    }
+
+    .howto-iframe{
+        width: 92%;
+        align-self: center;
+    }
+
+    .howto-steps{
+        width: 90%;
+        align-self: center;
     }
 
 }

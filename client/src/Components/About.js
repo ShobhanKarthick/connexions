@@ -1,12 +1,31 @@
 import React from 'react'
+import { Menu, Close } from '@material-ui/icons'
 import { Link } from 'react-router-dom'
 
 function About() {
+
+    const open = () =>{
+        document.getElementById("home-nav").style.display = "flex"
+    }
+
+    const close = () =>{
+        document.getElementById("home-nav").style.display = "none"
+    }
+
     return (
         <div className="about-us">
-        <div className="home-nav">
-        <Link to="/play">PLAY</Link>
+        <div className="head-container">
+        <div style={{width: "100%", boxSizing: "border-box"}}>
+        <h1 id="home-head" className="home-head">CONNEXIONS</h1>
+        <p style={{width: "fit-content", margin: 0, }} >About Us</p>
+        </div>
+        <Menu onClick={open} style={{color: "#ffffff", fontSize: "40px",}} />
+        </div>
+        <div id="home-nav" className="home-nav">
+        <Close onClick={close} style={{color: "#ffffff", fontSize: "30px", alignSelf: "flex-end"}} />
         <Link to="/">HOME</Link>
+        <Link to="/howtoplay">HOW TO PLAY</Link>
+        <Link to="/play">PLAY</Link>
         </div>
 
         <fieldset className="about-container">

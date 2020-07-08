@@ -1,10 +1,22 @@
 import React from 'react'
+import { Menu, Close } from '@material-ui/icons'
 import { Link } from 'react-router-dom'
 
 function Home() {
+
+    const open = () =>{
+        document.getElementById("home-nav").style.display = "flex"
+    }
+
+    const close = () =>{
+        document.getElementById("home-nav").style.display = "none"
+    }
+
     return (
         <div className="home">
-        <div className="home-nav">
+        <Menu onClick={open} style={{color: "#ffffff", fontSize: "40px", alignSelf: "flex-end", padding: "35px 40px"}} />
+        <div id="home-nav" className="home-nav">
+        <Close onClick={close} style={{color: "#ffffff", fontSize: "30px", alignSelf: "flex-end"}} />
         <Link to="/about">ABOUT US</Link>
         <Link to="/play">PLAY</Link>
         </div>
@@ -12,7 +24,10 @@ function Home() {
         <div className="welcome">
         <h3 className="home-subhead">WELCOME TO</h3>
         <h1 className="home-head">CONNEXIONS</h1>
+        <div className="button-container-home">
         <Link className="home-play-button" to="/play"><strong>PLAY</strong></Link>
+        <Link className="home-howtoplay-button" to="/howtoplay"><strong>HOW TO PLAY</strong></Link>
+        </div>
         </div>
         </div>
     )

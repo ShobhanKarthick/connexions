@@ -5,6 +5,7 @@ import Home from './Components/Home';
 import Play from './Components/Play';
 import About from './Components/About';
 import Upload from './Components/Upload';
+import HowToPlay from './Components/HowToPlay';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Route path="/play" exact component={Play} />
       <Route path="/about" exact component={About} />
       <Route path="/upload" exact component={Upload} />
+      <Route path="/howtoplay" exact component={HowToPlay} />
     </Router>
     
   );
