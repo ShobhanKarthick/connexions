@@ -296,10 +296,10 @@ html, body{
 }
 
 .play-images{
-    display: inline-flex;
     padding: 10px;
     width: 20%;
     object-fit: cover;
+    box-sizing: border-box;
 }
 
 .answer-button{
@@ -334,6 +334,13 @@ html, body{
     margin-top: 25px;
 }
 
+.play-images-number{
+    padding-top: 10px;
+    color: #ffffff;
+    font-family: Nexa-Regular;
+    text-align: center;
+}
+
 @media only screen and (max-width:600px){
     /* .play-page{
         justify-content: space-evenly;
@@ -356,4 +363,34 @@ html, body{
         flex-direction: column;
     }
 
+}
+
+.toast-correct{
+    display: none;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #4ca541;
+    color: #ffffff;
+    text-align: center;
+    width: 300px;
+    padding: 10px;
+    font-family: Nexa-regular;
+    font-size: 20px;
+    border-radius: 5px;
+}
+
+.toast-incorrect{
+    display: none;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #f44336;
+    color: #ffffff;
+    text-align: center;
+    width: 300px;
+    padding: 10px;
+    font-family: Nexa-regular;
+    font-size: 20px;
+    border-radius: 5px;
 }

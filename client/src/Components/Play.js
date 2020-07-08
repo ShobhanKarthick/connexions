@@ -14,10 +14,14 @@ function Play() {
   }, [allConnexions]);
 
   if (allConnexions[number]) {
-    // console.log(allConnexions[number])
     clue = allConnexions[number].clue
     images = allConnexions[number].links.map((current, index) => {
-      return <img className="play-images" src={current} key={index} alt="img" />;
+      return (
+        <React.Fragment>
+        <div className="play-images-number">{index+1}</div>
+        <img className="play-images" src={current} key={index} alt="img" />
+        </React.Fragment>
+        )
     });
   }
 
@@ -31,11 +35,16 @@ function Play() {
     if (
       allConnexions[number].answer.toUpperCase() === userAnswer.toUpperCase()
     ) {
-      alert("Bravo! The answer is correct"); // put a toast here
+      // alert("Bravo! The answer is correct"); // put a toast here
+      document.getElementById('toast-correct').style.display = "block";
+      window.setTimeout(function() { document.getElementById('toast-correct').style.display = "none"; }, 2500);
+
       setNumber(number + 1);
       setUserAnswer("");
+
     } else {
-      alert("The answer is wrong");
+      document.getElementById('toast-incorrect').style.display = "block";
+      window.setTimeout(function() { document.getElementById('toast-incorrect').style.display = "none"; }, 2500)
     }
   };
 
@@ -43,10 +52,14 @@ function Play() {
     event.preventDefault();
     alert("The answer is " + allConnexions[number].answer);
     setNumber(number + 1);
+    setUserAnswer('')
   };
 
   return (
     <div className="play-page">
+    <div id="toast-correct" className="toast-correct">Bravo! Your answer is correct</div>
+    <div id="toast-incorrect" className="toast-incorrect">Sorry! Your answer is wrong</div>
+
       {number === 0 && (
         <h1 className="play-page-head">Let's Connect... Shall we ?!</h1>
       )}
