@@ -67,6 +67,10 @@ html, body{
     margin-bottom: auto;
 }
 
+.head-container a{
+    color: #ffffff;
+}
+
 .home-subhead{
     font-size: 35px;
     margin: 0;

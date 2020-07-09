@@ -31,7 +31,7 @@ function About() {
         <fieldset className="about-container">
         <legend className="about-head">Our Story</legend>
         <div className="about-desc">
-            Just a bunch of undergrads from IIT-M, who are connected by one interest, and that is connecting you folks through this supercool game! It all started one day when we started playing this game among ourselves, when we realised how fun it was and then decided to spread the connection! These are some difficult times, so if you enjoy this game, please spread the word (nothing else), and let's make this great game viral!        {
+            Just a bunch of undergrads from IIT-M, who are connected by one interest, and that is connecting you folks through this supercool game! It all started one day when we started playing this game among ourselves, when we realised how fun it was and then decided to spread the Connexion! These are some difficult times, so if you enjoy this game, please spread the word (nothing else), and let's make this great game viral!        {
             // One small tiny teeny creature messed up our lives huh?. Not to worry the 4th dimension will take care. But boredom kills doesn't it.
             // Don't you wanna kill boredom!
         }
