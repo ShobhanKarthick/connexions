@@ -51,7 +51,11 @@ html, body{
 }
 
 #home-head{
-    font-size: 40px;
+    font-size: 30px;
+}
+
+#sub-head{
+    font-size: 17px;
 }
 
 .head-container{
@@ -60,6 +64,7 @@ html, body{
     padding: 25px;
     justify-content: space-between;
     box-sizing: border-box;
+    margin-bottom: auto;
 }
 
 .home-subhead{
@@ -78,11 +83,10 @@ html, body{
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 22%;
     padding: 25px;
     box-sizing: border-box;
     align-self: flex-end;
-    padding: 20px;
+    padding: 25px;
     padding-left: 45px;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.95);
@@ -90,6 +94,7 @@ html, body{
 
 #home-nav{
     display: none;
+    width: max-content;
 }
 
 .home-nav > a {
@@ -98,6 +103,7 @@ html, body{
     color: #ffffff;
     align-self: flex-start;
     margin-top: 30px;
+    padding-right: 100px;
 }
 
 .home-nav > a:hover{
@@ -159,18 +165,19 @@ html, body{
         letter-spacing: normal;
     }
 
-    .home-nav{
+    #home-nav{
         width: 100%;
+        padding: 25px;
     }
     .home-nav > a{
         font-size: 22px;
         align-self: center;
+        padding: 0;
     } 
 
     .button-container-home{
         flex-direction: column;
     }
-
 }
 
 .about-us{
@@ -183,7 +190,6 @@ html, body{
     align-items: center;
     flex-direction: column;
     box-sizing: border-box;
-    padding-bottom: 10px;
 }
 
 .about-container{
@@ -196,6 +202,10 @@ html, body{
     width: 80%;
     padding: 40px;
     box-sizing: border-box;
+}
+
+#team{
+    margin-top: 20px;
 }
 
 .about-head{
@@ -211,8 +221,9 @@ html, body{
 
 .about-desc{
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+    flex: 1;
+    flex-flow: row wrap;
+    justify-content: center;
     font-family: Nexa-Light;
     font-size: 30px;
     color: #ffffff;
@@ -222,16 +233,13 @@ html, body{
 
 .person{
     display: flex;
-    width: 44%;
+    flex: 0.5;
+    flex-basis: 45%;
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
-    height: 200px;
     box-sizing: border-box;
     margin: 20px;
-    /* border-left-color: #ffffff;
-    border-left-style: solid;
-    border-left-width: 6px; */
 }
 
 .avatar{
@@ -272,12 +280,15 @@ html, body{
 
 #team{
     padding: 30px 40px;
+    margin: 0;
+    margin-top: 30px;
 }
 
 .person{
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin-bottom: 40px;
 }
 
 .avatar{
@@ -412,9 +423,8 @@ html, body{
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    padding-bottom: 30px;
     box-sizing: border-box;
-    /* padding: 15px; */
-    padding-bottom: 10px;
 }
 
 .play-page-head {
@@ -481,6 +491,7 @@ html, body{
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin-bottom: auto;
 }
 
 .play-answer{
@@ -666,6 +677,74 @@ html, body{
     .howto-steps{
         width: 90%;
         align-self: center;
+    }
+
+}
+
+.footer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #99999918;
+    padding: 0 20px;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 20px;
+}
+
+.footer p{
+    text-align: center;
+}
+
+.footer h5{
+    text-align: center;
+    margin: 0;
+    font-family: Nexa-Regular;
+}
+
+.footer p:nth-child(1){
+    margin-right: auto;
+}
+
+.icons{
+    box-sizing: border-box;
+    margin-left: auto;
+}
+
+.icons svg{
+    color: #ffffff;
+    padding-left: 20px;
+}
+
+#copyright{
+    position: absolute;
+    left: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+@media only screen and (max-width:600px){
+    .footer{
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 0;
+    }
+
+    .footer p{
+        margin: 0;
+        margin: 5px 0;
+    }
+
+    .footer p:nth-child(1){
+        margin-right: 0;
+    }
+
+    #copyright{
+        position: relative;
+        left: 0;
+        transform: none;
     }
 
 }

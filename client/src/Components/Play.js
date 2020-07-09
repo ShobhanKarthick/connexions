@@ -86,12 +86,12 @@ const close = () =>{
     <div className="head-container">
     <div style={{width: "100%", boxSizing: "border-box"}}>
     <h1 id="home-head" className="home-head">CONNEXIONS</h1>
-    <p style={{width: "fit-content", margin: 0, }} >Play</p>
+    <p id="sub-head" style={{width: "fit-content", margin: 0, }} >Play</p>
     </div>
     <Menu onClick={open} style={{color: "#ffffff", fontSize: "40px",}} />
     </div>
     <div id="home-nav" className="home-nav">
-    <Close onClick={close} style={{color: "#ffffff", fontSize: "30px", alignSelf: "flex-end"}} />
+    <Close onClick={close} style={{color: "#ffffff", fontSize: "40px", alignSelf: "flex-end"}} />
     <Link to="/">HOME</Link>
     <Link to="/howtoplay">HOW TO PLAY</Link>
     <Link to="/about">ABOUT US</Link>

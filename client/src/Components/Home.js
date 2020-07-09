@@ -16,7 +16,7 @@ function Home() {
         <div className="home">
         <Menu onClick={open} style={{color: "#ffffff", fontSize: "40px", alignSelf: "flex-end", padding: "35px 40px"}} />
         <div id="home-nav" className="home-nav">
-        <Close onClick={close} style={{color: "#ffffff", fontSize: "30px", alignSelf: "flex-end"}} />
+        <Close onClick={close} style={{color: "#ffffff", fontSize: "40px", alignSelf: "flex-end"}} />
         <Link to="/about">ABOUT US</Link>
         <Link to="/play">PLAY</Link>
         </div>
