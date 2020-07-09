@@ -16,7 +16,7 @@ function HowToPlay() {
         <div className="howtoplay">
         <div className="head-container">
         <div style={{width: "100%", boxSizing: "border-box"}}>
-        <h1 id="home-head" className="home-head">CONNEXIONS</h1>
+        <h1 id="home-head" className="home-head"><a href="/">CONNEXIONS</a></h1>
         <p id="sub-head" style={{width: "fit-content", margin: 0, }} >How to play</p>
         </div>
         <Menu onClick={open} style={{color: "#ffffff", fontSize: "40px",}} />

@@ -16,9 +16,10 @@ function Home() {
         <div className="home">
         <Menu onClick={open} style={{color: "#ffffff", fontSize: "40px", alignSelf: "flex-end", padding: "35px 40px"}} />
         <div id="home-nav" className="home-nav">
-        <Close onClick={close} style={{color: "#ffffff", fontSize: "40px", alignSelf: "flex-end"}} />
-        <Link to="/about">ABOUT US</Link>
+        <Close onClick={close} style={{position: "absolute", top: 0, right: 0, color: "#ffffff", fontSize: "40px", padding: "35px 40px"}} />
+        <Link to="/howtoplay" style={{marginTop: "80px"}}>HOW TO PLAY</Link>
         <Link to="/play">PLAY</Link>
+        <Link to="/about" >ABOUT US</Link>
         </div>
         
         <div className="welcome">
