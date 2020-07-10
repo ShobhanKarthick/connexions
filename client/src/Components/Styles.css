@@ -442,6 +442,7 @@ html, body{
     font-weight: normal;
     font-family: Nexa-Regular;
     margin: 0;
+    margin-bottom: 20px;
 }
 
 .play-images-container{
@@ -449,17 +450,20 @@ html, body{
     flex-direction: row;
     justify-content: center;
     flex-wrap: wrap;
+    width: 80%;
 }
 
 .single-image-container{
-    display: inline-flex;
+    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 20%;
+    width: max-content;
+    flex: 0 0 25%;
+    min-width: 200px;
     box-sizing: border-box;
-    padding: 15px;
-    padding-bottom: 20px;
+    padding: 5px;
+    padding-bottom: 10px;
 }
 
 .play-images{
@@ -577,12 +581,17 @@ html, body{
         font-size: 25px;
     }
 
+    .play-sub-head{
+        margin-bottom: 10px;
+    }
+
     .play-images-container{
+        width: 90%;
         margin-top: 25px;
     }
 
     .single-image-container{
-        width: 45%;
+        min-width: 300px;
         padding: 5px;
         padding-bottom: 15px;
     }
@@ -620,7 +629,10 @@ html, body{
 }
 
 .howtoplay{
-    background-color: #4ca541;
+    background-image:linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('./Images/bg6.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -636,6 +648,7 @@ html, body{
 
 .steps-container{
     display: flex;
+    flex: 1;
     flex-direction: row;
     width: 100%;
     justify-content: space-evenly;
@@ -644,14 +657,38 @@ html, body{
     box-sizing: border-box;
 }
 
-.howto-iframe{
+.steps-container div:nth-child(1){
+    display: inline-flex;
+    flex: 0.3;
+    justify-content: center;
+    align-items: center;
+}
+
+.howto-iframe {
+    position: relative;
+    height: 80vh;
+    width: 30vw;
+    box-sizing: border-box;
+    /* pointer-events: none; */
+}
+
+.howto-iframe div{
+    position: absolute;
+    clip:rect(160px 30vw 80vh 10px);
+    /* left: 0px; 
+    top: 0px; */
+}
+
+.howto-iframe iframe{
     border: 0;
     height: 80vh;
     width: 30vw;
+
 }
 
 .howto-steps{
     display: flex;
+    flex: 0.7;
     flex-direction: column;
     justify-content: center;
     padding: 0 15px;
@@ -668,7 +705,7 @@ html, body{
 
 @media only screen and (max-width:600px){
     .steps-container{
-        flex-direction: column;
+        flex-direction: column-reverse;
         padding: 0 10px;
 
     }
@@ -752,4 +789,25 @@ html, body{
         transform: none;
     }
 
+}
+
+.loader {
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s linear infinite;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }

@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 
 function HowToPlay() {
 
+    const img = require('./Images/howtoplay_ss.png')
     const open = () =>{
         document.getElementById("home-nav").style.display = "flex"
     }
@@ -28,7 +29,17 @@ function HowToPlay() {
         <Link to="/about">ABOUT US</Link>
         </div>
         <div className="steps-container">
-        <iframe className="howto-iframe" src="/play" title="Play page" allowFullScreen={false} />
+ {
+        // <div className="howto-iframe" >
+        // <div>
+        // <iframe src="/play" title="Play page" frameborder="0" allowFullScreen={false} />
+        // </div>
+        // </div>
+    }
+        <div>
+        <img src={img} width="90%" alt="howtoplay"/>
+        </div>
+
         <div className="howto-steps">
         <h1>Step #1</h1>
         <h2>Look at the clue</h2>

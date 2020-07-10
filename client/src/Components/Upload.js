@@ -47,10 +47,12 @@ function Upload() {
     axios.post("/connexions/add", connexion)
     .then(connexion => {
       console.log("Connexion added")
+      alert("Connexions Uploaded successfully")
     })
     .catch(err => {
       console.log(err)
       console.log("Connexion was not added")
+      alert("Tell Shobhan its not working!!!")
     })
 
     setClue('')

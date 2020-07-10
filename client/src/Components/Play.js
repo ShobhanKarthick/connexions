@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Menu, Close } from '@material-ui/icons'
 import {Link} from "react-router-dom"
 import axios from "axios";
+import Loader from "./Loader";
 
 function Play() {
   const [allConnexions, setAllConnexions] = useState("");
@@ -68,7 +69,7 @@ function Play() {
         document.getElementById("play-sub-head").style.display = "none"
         document.getElementById("play-answer").style.display = "none"
         document.getElementById("connect").style.display = "none"
-        return <h1 style={{color: "#ffffff"}}>That's it for now we'll add more!!!</h1>
+        return <h1 style={{margin: "10px", color: "#ffffff"}}>That's it for now we'll add more!!!</h1>
       }
     }
   }
@@ -117,7 +118,7 @@ const close = () =>{
       <h1 id="play-sub-head" className="play-sub-head">Clue: {clue}</h1>
       </div>
 
-      <div id="imgLinks" className="play-images-container">{images}</div>
+      <div id="imgLinks" className="play-images-container">{images?images:!(number === allConnexions.length)&&<Loader id="loader" />}</div>
       <form className="play-form" onSubmit={submitHandler}>
         <input
           id="play-answer"
