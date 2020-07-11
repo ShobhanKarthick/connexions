@@ -133,7 +133,6 @@ function Play() {
         <br />
         <span>It's </span>{" "}
         <span style={{ fontFamily: "Nexa-Bold" }}>
-          {" "}
           {allConnexions[number] && allConnexions[number].answer}
         </span>
         <br />
@@ -168,12 +167,14 @@ function Play() {
 
       <div id='imgLinks' className='play-images-container'>
         {
-          // images
-          // ? images
-          // : !(number === allConnexions.length) && <Loader id='loader' />
+          images
+          ? images
+          : !(number === allConnexions.length) && <Loader id='loader' />
         }
 
-        {images}
+        {
+          // images
+        }
       </div>
       <form className='play-form' onSubmit={submitHandler}>
         <input
