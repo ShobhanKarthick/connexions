@@ -206,6 +206,15 @@ a {
 }
 
 @media only screen and (max-width: 600px) {
+
+  .category-button-container{
+    flex-direction: column;
+  }
+
+  .category-selection{
+    width: 90%;
+  }
+
   .home-head {
     font-size: 35px;
   }

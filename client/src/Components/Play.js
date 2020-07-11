@@ -108,7 +108,7 @@ function Play() {
   return (
     <div className='play-page'>
 
-    <div id="bg-dark-overlay" style={{display: "block"}} className="bg-overlay" />
+    <div id="bg-dark-overlay" style={{display: "block", backgroundColor: "#080808"}} className="bg-overlay" />
 
     <div id="category-selection" className="category-selection">
     <h1>What category you wanna play in ?!</h1>
