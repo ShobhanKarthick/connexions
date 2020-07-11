@@ -6,15 +6,20 @@ import Loader from "./Loader";
 
 function Play() {
   const [allConnexions, setAllConnexions] = useState("");
+  const [category, setCategory] = useState("")
   const [userAnswer, setUserAnswer] = useState("");
   const [number, setNumber] = useState(0);
-  let images, clue;
+  let images;
+  let clue;
 
   useEffect(() => {
     axios.get("/connexions").then((response) => {
-      setAllConnexions(response.data);
+      let results = response.data.filter((current) => {
+          return current.clue === category
+      })
+      setAllConnexions(results);
     });
-  }, [allConnexions]);
+  }, [allConnexions, category]);
 
   // if(number === 0){
   //   if(allConnexions){
@@ -26,13 +31,14 @@ function Play() {
   if (allConnexions[number]) {
     clue = allConnexions[number].clue;
     images = allConnexions[number].links.map((current, index) => {
-      return (
-        <div className='single-image-container'>
+        return (
+          <div className='single-image-container'>
           <img className='play-images' src={current} key={index} alt='img' />
           <div className='play-images-number'>{index + 1}</div>
-        </div>
-      );
-    });
+          </div>
+          );
+        }
+    );
   }
   else{
     images = () => {return <Loader />}
@@ -101,6 +107,22 @@ function Play() {
 
   return (
     <div className='play-page'>
+
+    <div id="bg-dark-overlay" style={{display: "block"}} className="bg-overlay" />
+
+    <div id="category-selection" className="category-selection">
+    <h1>What category you wanna play in ?!</h1>
+    <div className="category-button-container">
+    <button className="category-button" onClick={() => {setCategory("Movies"); document.getElementById("bg-dark-overlay").style.display = "none";document.getElementById("category-selection").style.display = "none";}}>Movies</button>
+    <button className="category-button" onClick={() => {setCategory("TV Series"); document.getElementById("bg-dark-overlay").style.display = "none";document.getElementById("category-selection").style.display = "none";}}>TV Series</button>
+    <button className="category-button" onClick={() => {setCategory("Cartoons"); document.getElementById("bg-dark-overlay").style.display = "none";document.getElementById("category-selection").style.display = "none";}}>Cartoons</button>
+    </div>
+    </div>
+
+
+
+
+
       <div className='head-container'>
         <div style={{ width: "100%", boxSizing: "border-box" }}>
           <h1 id='home-head' className='home-head'>
@@ -160,9 +182,11 @@ function Play() {
         {number < allConnexions.length && (
           <h1 className='play-page-head'>Connexion #{number + 1}</h1>
         )}
-        <h1 id='play-sub-head' className='play-sub-head'>
-          Clue: {clue}
-        </h1>
+{
+        //   <h1 id='play-sub-head' className='play-sub-head'>
+        //   Clue: {clue}
+        // </h1>
+}
       </div>
 
       <div id='imgLinks' className='play-images-container'>

@@ -3,8 +3,8 @@ import axios from "axios";
 import { Add, Close } from "@material-ui/icons";
 
 function Upload() {
-  const [clue, setClue] = useState();
-  const [answer, setAnswer] = useState();
+  const [clue, setClue] = useState('');
+  const [answer, setAnswer] = useState('');
   const [links, setLinks] = useState([""]);
 
   const add = () => {
@@ -65,16 +65,19 @@ function Upload() {
     <div className='upload-page'>
       <h1 className='upload-head'>Upload the connexion</h1>
       <form className='upload-form' id='upload-form' onSubmit={submitHandler}>
-        <input
-          style={{ marginBottom: "20px" }}
-          id='clue-input'
-          className='upload-input'
-          type='text'
-          value={clue}
-          onChange={clueHandler}
-          placeholder='Enter the clue'
-          required
-        />
+        <select
+        style={{ marginBottom: "20px" }}
+        id='clue-input'
+        className='upload-input'
+        value={clue}
+        onChange={clueHandler}
+        required
+        >
+        <option className="upload-input-option" style={{display: "none"}} value="" selected>Enter the clue</option>
+        <option className="upload-input-option" value="Movies">Movies</option>
+        <option className="upload-input-option" value="TV Series">TV Series</option>
+        <option className="upload-input-option" value="Cartoons">Cartoons</option>
+        </select>
         <input
           style={{ marginBottom: "20px" }}
           id='answer-input'

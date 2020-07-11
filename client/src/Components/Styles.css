@@ -129,6 +129,47 @@ a {
   align-items: center;
 }
 
+.category-selection{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  z-index: 2;
+}
+
+.category-selection h1{
+  color: #ffffff;
+  text-align: center;
+}
+
+.category-button-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+}
+
+.category-button {
+  border: 0;
+  width: fit-content;
+  margin-top: 30px;
+  text-align: center;
+  font-family: Nexa-Bold;
+  font-size: 25px;
+  padding: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  color: #ffffff;
+  background-color: #4ca541;
+  border-radius: 35px;
+}
+
 .button-container-home {
   display: flex;
   flex-direction: row;
@@ -344,6 +385,14 @@ a {
   padding-left: 15px;
   width: 50vw;
   box-sizing: border-box;
+}
+
+.upload-input-option{
+  font-family: Nexa-Regular;
+  font-size: 28px;
+  color: #ffffff;
+  border: 0;
+  padding: 10px;
 }
 
 #clue-input,
