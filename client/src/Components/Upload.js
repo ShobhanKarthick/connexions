@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from 'axios'
+import axios from "axios";
 import { Add, Close } from "@material-ui/icons";
 
 function Upload() {
@@ -22,12 +22,12 @@ function Upload() {
   };
 
   const clueHandler = (event) => {
-      setClue(event.target.value)
-  }
+    setClue(event.target.value);
+  };
 
   const answerHandler = (event) => {
-    setAnswer(event.target.value)
-  }
+    setAnswer(event.target.value);
+  };
 
   const linksHandler = (event, index) => {
     let linksArray = [...links];
@@ -42,53 +42,53 @@ function Upload() {
       clue: clue,
       answer: answer,
       links: links,
-    }
+    };
 
-    axios.post("/connexions/add", connexion)
-    .then(connexion => {
-      console.log("Connexion added")
-      alert("Connexions Uploaded successfully")
-    })
-    .catch(err => {
-      console.log(err)
-      console.log("Connexion was not added")
-      alert("Tell Shobhan its not working!!!")
-    })
+    axios
+      .post("/connexions/add", connexion)
+      .then((connexion) => {
+        console.log("Connexion added");
+        alert("Connexions Uploaded successfully");
+      })
+      .catch((err) => {
+        console.log(err);
+        console.log("Connexion was not added");
+        alert("Tell Shobhan its not working!!!");
+      });
 
-    setClue('')
-    setAnswer('')
-    setLinks([""])
-
+    setClue("");
+    setAnswer("");
+    setLinks([""]);
   };
 
   return (
-    <div className="upload-page">
-      <h1 className="upload-head">Upload the connexion</h1>
-      <form className="upload-form" id="upload-form" onSubmit={submitHandler}>
+    <div className='upload-page'>
+      <h1 className='upload-head'>Upload the connexion</h1>
+      <form className='upload-form' id='upload-form' onSubmit={submitHandler}>
         <input
           style={{ marginBottom: "20px" }}
-          id="clue-input"
-          className="upload-input"
-          type="text"
+          id='clue-input'
+          className='upload-input'
+          type='text'
           value={clue}
           onChange={clueHandler}
-          placeholder="Enter the clue"
+          placeholder='Enter the clue'
           required
         />
         <input
           style={{ marginBottom: "20px" }}
-          id="answer-input"
-          className="upload-input"
-          type="text"
+          id='answer-input'
+          className='upload-input'
+          type='text'
           value={answer}
           onChange={answerHandler}
-          placeholder="Enter the answer"
+          placeholder='Enter the answer'
           required
         />
 
         {links.map((current, index) => {
           return (
-            <div className="links-input-container" key="index">
+            <div className='links-input-container' key='index'>
               <div
                 style={{
                   display: "flex",
@@ -97,8 +97,8 @@ function Upload() {
                 }}
               >
                 <input
-                  className="upload-input"
-                  type="text"
+                  className='upload-input'
+                  type='text'
                   placeholder={"Enter the link for the image " + (index + 1)}
                   value={current}
                   onChange={(event) => linksHandler(event, index)}
@@ -107,8 +107,8 @@ function Upload() {
                 {links.length !== 1 && (
                   <Close
                     style={{ fontSize: "35px" }}
-                    className="remove-button"
-                    id="remove-button"
+                    className='remove-button'
+                    id='remove-button'
                     onClick={() => remove(current)}
                   />
                 )}
@@ -116,14 +116,16 @@ function Upload() {
               {links.length - 1 === index && links.length - 1 !== 7 && (
                 <Add
                   style={{ fontSize: "35px" }}
-                  className="add-button"
+                  className='add-button'
                   onClick={add}
                 />
               )}
             </div>
           );
         })}
-        <button className="upload-button" for="upload-form" type="submit">UPLOAD</button>
+        <button className='upload-button' for='upload-form' type='submit'>
+          UPLOAD
+        </button>
       </form>
     </div>
   );
