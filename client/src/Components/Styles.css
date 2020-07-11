@@ -468,6 +468,9 @@ a {
   box-sizing: border-box;
   padding: 5px;
   padding-bottom: 10px;
+  box-sizing: border-box;
+  margin-top: 8px;
+  margin-bottom: 15px;
 }
 
 .play-images {
