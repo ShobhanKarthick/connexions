@@ -83,9 +83,9 @@ function Play() {
   };
 
   const lastPage = () => {
-    if (allConnexions[number - 1]) {
+    if (allConnexions[number-1]) {
       if (number === allConnexions.length) {
-        document.getElementById("play-sub-head").style.display = "none";
+        // document.getElementById("play-sub-head").style.display = "none";
         document.getElementById("play-answer").style.display = "none";
         document.getElementById("connect").style.display = "none";
         return (
@@ -200,7 +200,7 @@ function Play() {
           // images
         }
       </div>
-      <form className='play-form' onSubmit={submitHandler}>
+      <form id="play-form" className='play-form' onSubmit={submitHandler}>
         <input
           id='play-answer'
           className='play-answer'
@@ -211,25 +211,7 @@ function Play() {
           title='Enter your answer!'
           required
         />
-        <div
-          id='button-container'
-          style={
-            !(number + 1 < allConnexions.length)
-              ? {
-                  flexDirection: "column",
-                  width: "100%",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }
-              : {
-                  width: "100%",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }
-          }
-        >
+        <div id='button-container' className='button-container'>
           <button id='connect' className='answer-button' type='submit'>
             CONNECT
           </button>
