@@ -24,16 +24,13 @@ function Play() {
       let shuffle = shuffleSeed.shuffle(results, random)
       setAllConnexions(shuffle);
     });
-  }, [allConnexions, category]);
+  }, [allConnexions, category, random, shuffleSeed]);
 
   if(!executed){
     setRandom(generateHash({length: 7}))
     setExecuted(true)
     return
   }    
-
-  console.log(random)
-
 
   if (allConnexions[number]) {
     clue = allConnexions[number].clue;
