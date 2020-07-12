@@ -3,12 +3,16 @@ import { Menu, Close } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import Loader from "./Loader";
+import generateHash  from 'random-hash'
 
 function Play() {
   const [allConnexions, setAllConnexions] = useState("");
   const [category, setCategory] = useState("")
   const [userAnswer, setUserAnswer] = useState("");
   const [number, setNumber] = useState(0);
+  const [random, setRandom] = useState('')
+  const [executed, setExecuted] = useState(false);
+  const shuffleSeed = require('shuffle-seed');
   let images;
   let clue;
 
@@ -17,16 +21,19 @@ function Play() {
       let results = response.data.filter((current) => {
           return current.clue === category
       })
-      setAllConnexions(results);
+      let shuffle = shuffleSeed.shuffle(results, random)
+      setAllConnexions(shuffle);
     });
   }, [allConnexions, category]);
 
-  // if(number === 0){
-  //   if(allConnexions){
-  //     let shuffled = allConnexions.sort(() => Math.random() - 0.5)
-  //     console.log(shuffled)
-  //   }
-  // }
+  if(!executed){
+    setRandom(generateHash({length: 7}))
+    setExecuted(true)
+    return
+  }    
+
+  console.log(random)
+
 
   if (allConnexions[number]) {
     clue = allConnexions[number].clue;
@@ -89,7 +96,7 @@ function Play() {
         document.getElementById("play-answer").style.display = "none";
         document.getElementById("connect").style.display = "none";
         return (
-          <h1 style={{ margin: "10px", color: "#ffffff" }}>
+          <h1 style={{ margin: "20px", color: "#ffffff" }}>
             That's it for now we'll add more!!!
           </h1>
         );
