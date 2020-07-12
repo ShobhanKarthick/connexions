@@ -650,7 +650,7 @@ a {
         justify-content: space-evenly;
     } */
   .play-images {
-    object-fit: cover;
+    object-fit: contain;
   }
 
   .play-page-head {

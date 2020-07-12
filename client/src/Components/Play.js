@@ -64,6 +64,8 @@ function Play() {
 
       setNumber(number + 1);
       setUserAnswer("");
+      window.scrollTo(0, 100);
+
     } else {
       document.getElementById("toast-incorrect").style.display = "block";
       window.setTimeout(function () {
