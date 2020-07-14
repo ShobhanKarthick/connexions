@@ -17,7 +17,6 @@ function Play() {
 
   let images;
   let clue;
-  // let timer = 0
 
   useEffect(() => {
     axios.get("/connexions").then((response) => {
@@ -29,7 +28,6 @@ function Play() {
     });
   }, [allConnexions, category, random, shuffleSeed]);
 
-  const [time, setTime] = useState(Date.now());
 
 useEffect(() => {
   const interval = setInterval(() => {
@@ -143,7 +141,7 @@ window.setTimeout(function () {
     <div className='play-page'>
 
     <div id="bg-dark-overlay" style={{display: "block", backgroundColor: "#080808"}} className="bg-overlay" />
-    <div id='hold-on-info' className='hold-on-info'>Hold your horses and think baby!!!</div> 
+    <div id='hold-on-info' className='hold-on-info'> You can see the answer in {20 - timer} secs.<br /> So, Hold your horses and think baby!!!</div> 
 
     <div id="category-selection" className="category-selection">
     <h1>What category you wanna play in ?!</h1>
