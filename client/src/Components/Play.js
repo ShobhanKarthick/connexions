@@ -35,7 +35,6 @@ useEffect(() => {
   const interval = setInterval(() => {
     setTimer(timer + 1) 
   }, 1000);
-  console.log(timer)
   return () => {
     clearInterval(interval);
   };
