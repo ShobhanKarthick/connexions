@@ -532,6 +532,7 @@ a {
 }
 
 .play-images {
+  background-color: #ffffff;
   width: 100%;
   height: 100%;
   object-fit: fill;
@@ -619,6 +620,22 @@ a {
   top: 20px;
   right: 20px;
   background-color: #f44336;
+  color: #ffffff;
+  text-align: center;
+  width: 300px;
+  padding: 10px;
+  font-family: Nexa-regular;
+  font-size: 20px;
+  border-radius: 5px;
+}
+
+.hold-on-info{
+  display: none;
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #4ca541;
   color: #ffffff;
   text-align: center;
   width: 300px;

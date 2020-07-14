@@ -12,9 +12,12 @@ function Play() {
   const [number, setNumber] = useState(0);
   const [random, setRandom] = useState('')
   const [executed, setExecuted] = useState(false);
+  const [timer, setTimer] = useState(0);
   const shuffleSeed = require('shuffle-seed');
+
   let images;
   let clue;
+  // let timer = 0
 
   useEffect(() => {
     axios.get("/connexions").then((response) => {
@@ -26,11 +29,29 @@ function Play() {
     });
   }, [allConnexions, category, random, shuffleSeed]);
 
+  const [time, setTime] = useState(Date.now());
+
+useEffect(() => {
+  const interval = setInterval(() => {
+    setTimer(timer + 1) 
+  }, 1000);
+  console.log(timer)
+  return () => {
+    clearInterval(interval);
+  };
+}, [timer]);
+
+if(document.getElementById("hold-on-info") && document.getElementById("hold-on-info").style.display === "block"){
+window.setTimeout(function () {
+  document.getElementById("hold-on-info").style.display = "none";
+}, 3000);
+}
+
   if(!executed){
     setRandom(generateHash({length: 7}))
     setExecuted(true)
     return
-  }    
+  }
 
   if (allConnexions[number]) {
     clue = allConnexions[number].clue;
@@ -43,9 +64,6 @@ function Play() {
           );
         }
     );
-  }
-  else{
-    images = () => {return <Loader />}
   }
 
   const userAnswerHandler = (event) => {
@@ -63,6 +81,7 @@ function Play() {
       }, 3000);
 
       setNumber(number + 1);
+      setTimer(0)
       setUserAnswer("");
       window.scrollTo(0, 100);
 
@@ -76,13 +95,20 @@ function Play() {
 
   const displayAnswer = (event) => {
     event.preventDefault();
-    document.getElementById("answer-display").style.display = "block";
-    document.getElementById("bg-overlay").style.display = "block";
+
+    if(timer > 20){
+      document.getElementById("answer-display").style.display = "block";
+      document.getElementById("bg-overlay").style.display = "block";
+    }
+    else{
+      document.getElementById("hold-on-info").style.display = "block";
+    }
   };
 
   const postAnswerDisplay = () => {
     document.getElementById("answer-display").style.display = "none";
     document.getElementById("bg-overlay").style.display = "none";
+    setTimer(0);
     setNumber(number + 1);
     setUserAnswer("");
     window.scrollTo(0, 100);
@@ -115,20 +141,16 @@ function Play() {
     <div className='play-page'>
 
     <div id="bg-dark-overlay" style={{display: "block", backgroundColor: "#080808"}} className="bg-overlay" />
+    <div id='hold-on-info' className='hold-on-info'>Hold your horses and think baby!!!</div> 
 
     <div id="category-selection" className="category-selection">
     <h1>What category you wanna play in ?!</h1>
     <div className="category-button-container">
-    <button className="category-button" onClick={() => {setCategory("Movies"); document.getElementById("bg-dark-overlay").style.display = "none";document.getElementById("category-selection").style.display = "none";}}>Movies</button>
-    <button className="category-button" onClick={() => {setCategory("TV Series"); document.getElementById("bg-dark-overlay").style.display = "none";document.getElementById("category-selection").style.display = "none";}}>TV Series</button>
-    <button className="category-button" onClick={() => {setCategory("Cartoons"); document.getElementById("bg-dark-overlay").style.display = "none";document.getElementById("category-selection").style.display = "none";}}>Cartoons</button>
+    <button className="category-button" onClick={() => {setTimer(0); setCategory("Movies"); document.getElementById("bg-dark-overlay").style.display = "none";document.getElementById("category-selection").style.display = "none";}}>Movies</button>
+    <button className="category-button" onClick={() => {setTimer(0); setCategory("TV Series"); document.getElementById("bg-dark-overlay").style.display = "none";document.getElementById("category-selection").style.display = "none";}}>TV Series</button>
+    <button className="category-button" onClick={() => {setTimer(0); setCategory("Cartoons"); document.getElementById("bg-dark-overlay").style.display = "none";document.getElementById("category-selection").style.display = "none";}}>Cartoons</button>
     </div>
     </div>
-
-
-
-
-
       <div className='head-container'>
         <div style={{ width: "100%", boxSizing: "border-box" }}>
           <h1 id='home-head' className='home-head'>
