@@ -641,10 +641,10 @@ a {
   background-color: #2e8843;
   color: #ffffff;
   text-align: center;
-  width: 300px;
+  width: 380px;
   padding: 10px;
   font-family: Nexa-regular;
-  font-size: 18px;
+  font-size: 20px;
   border-radius: 5px;
 }
 
@@ -733,6 +733,11 @@ a {
 
   #show-answer {
     width: 200px;
+  }
+
+  .hold-on-info{
+    font-size: 16px;
+    width: 300px;
   }
 }
 
