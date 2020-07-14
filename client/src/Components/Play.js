@@ -120,9 +120,12 @@ window.setTimeout(function () {
         document.getElementById("play-answer").style.display = "none";
         document.getElementById("connect").style.display = "none";
         return (
+          <div style={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center",}}>
           <h1 style={{ margin: "20px", color: "#ffffff" }}>
-            That's it for now we'll add more!!!
+          That's it for now we'll add more!!!
           </h1>
+          <div to="/play" onClick={() => window.location.reload()} className="play-again">PLAY AGAIN</div>
+          </div>
         );
       }
     }

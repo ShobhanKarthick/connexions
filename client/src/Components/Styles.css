@@ -537,6 +537,9 @@ a {
   height: 100%;
   object-fit: fill;
   box-sizing: border-box;
+  border-color: #4ca541;
+  border-style: solid;
+  border-width: 5px;
 }
 
 .button-container{
@@ -635,7 +638,7 @@ a {
   top: 20px;
   left: 50%;
   transform: translateX(-50%);
-  background-color: #4ca541;
+  background-color: #2e8843;
   color: #ffffff;
   text-align: center;
   width: 300px;
@@ -662,12 +665,23 @@ a {
   z-index: 1;
 }
 
+.play-again{
+  width: 180px;
+  text-align: center;
+  font-family: Nexa-Bold;
+  font-size: 25px;
+  padding: 10px;
+  color: #ffffff;
+  background-color: #4ca541;
+  border-radius: 35px;
+}
+
 @media only screen and (max-width: 600px) {
   /* .play-page{
         justify-content: space-evenly;
     } */
   .play-images {
-    object-fit: contain;
+    object-fit: cover;
   }
 
   .play-page-head {
