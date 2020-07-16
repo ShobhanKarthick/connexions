@@ -539,7 +539,7 @@ a {
   box-sizing: border-box;
   border-color: #4ca541;
   border-style: solid;
-  border-width: 5px;
+  border-width: 3px;
 }
 
 .button-container{
@@ -810,9 +810,13 @@ a {
 
 .howto-steps > h1,
 .howto-steps > h2 {
-  background-color: #06060c99;
+  background-color: #06060cda;
   width: fit-content;
   padding: 10px;
+}
+
+.howto-steps > h2:nth-child(5){
+  background-color: #4ca541;
 }
 
 @media only screen and (max-width: 600px) {
@@ -828,6 +832,14 @@ a {
 
   .howto-steps {
     align-self: center;
+  }
+
+  .howto-steps > h1{
+    font-size: 28px;
+  }
+
+  .howto-steps > h2{
+    font-size: 21px;
   }
 }
 

@@ -51,10 +51,10 @@ function HowToPlay() {
           <h2>See the pictures in the given order</h2>
           <h1 style={{margin: 0}}>Step #2</h1>
           <h2>Try to guess the phrase according to the category you picked</h2>
+          <h2 style={{lineHeight: 1.5}}>Like in the picture given, Lion (Sher) + Lock + Homes <br /> Hence, its Sherlock Holmes </h2>
           <h1 style={{margin: 0}}>Step #3</h1>
-          <h2>
-            Enter your answer in the field
-            <br />
+          <h2 style={{lineHeight: 1.75}}>
+            Enter your answer in the field.
             <br />
             Now all you gotta do is {" "}
             <span
