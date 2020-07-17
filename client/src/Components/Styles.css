@@ -129,7 +129,7 @@ a {
   align-items: center;
 }
 
-.category-selection{
+.category-selection {
   position: fixed;
   top: 50%;
   left: 50%;
@@ -142,12 +142,12 @@ a {
   z-index: 2;
 }
 
-.category-selection h1{
+.category-selection h1 {
   color: #ffffff;
   text-align: center;
 }
 
-.category-button-container{
+.category-button-container {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
@@ -206,12 +206,11 @@ a {
 }
 
 @media only screen and (max-width: 600px) {
-
-  .category-button-container{
+  .category-button-container {
     flex-direction: column;
   }
 
-  .category-selection{
+  .category-selection {
     width: 90%;
   }
 
@@ -396,7 +395,7 @@ a {
   box-sizing: border-box;
 }
 
-.upload-input-option{
+.upload-input-option {
   font-family: Nexa-Regular;
   font-size: 28px;
   color: #ffffff;
@@ -542,7 +541,7 @@ a {
   border-width: 3px;
 }
 
-.button-container{
+.button-container {
   display: flex;
   flex-direction: row;
   width: 100%;
@@ -632,7 +631,7 @@ a {
   border-radius: 5px;
 }
 
-.hold-on-info{
+.hold-on-info {
   display: none;
   position: fixed;
   top: 20px;
@@ -665,7 +664,7 @@ a {
   z-index: 1;
 }
 
-.play-again{
+.play-again {
   width: 180px;
   text-align: center;
   font-family: Nexa-Bold;
@@ -674,6 +673,50 @@ a {
   color: #ffffff;
   background-color: #4ca541;
   border-radius: 35px;
+}
+
+.play-popup-container {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
+    url("./Images/bg5.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.play-popup {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
+  box-sizing: border-box;
+  background-color: #151515;
+}
+
+.play-popup > h1 {
+  text-align: center;
+  color: #ffffff;
+  margin: 0;
+}
+
+.play-popup > p {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  padding-top: 0;
+}
+
+.play-popup > svg {
+  padding: 25px;
+  align-self: flex-end;
 }
 
 @media only screen and (max-width: 600px) {
@@ -735,9 +778,24 @@ a {
     width: 200px;
   }
 
-  .hold-on-info{
+  .hold-on-info {
     font-size: 16px;
     width: 300px;
+  }
+
+  .play-popup {
+    width: 90%;
+  }
+
+  .play-popup > h1 {
+    font-size: 30px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .play-popup > p {
+    font-size: 20px;
+    flex-direction: column;
   }
 }
 
@@ -815,7 +873,7 @@ a {
   padding: 10px;
 }
 
-.howto-steps > h2:nth-child(5){
+.howto-steps > h2:nth-child(5) {
   background-color: #4ca541;
 }
 
@@ -834,11 +892,11 @@ a {
     align-self: center;
   }
 
-  .howto-steps > h1{
+  .howto-steps > h1 {
     font-size: 28px;
   }
 
-  .howto-steps > h2{
+  .howto-steps > h2 {
     font-size: 21px;
   }
 }
