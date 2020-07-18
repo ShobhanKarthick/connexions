@@ -14,11 +14,13 @@ function Play() {
   const [random, setRandom] = useState("");
   const [executed, setExecuted] = useState(false);
   const [timer, setTimer] = useState(0);
+  // const [imageLoad, setImageLoad] = useState(null)
   const history = useHistory();
   const shuffleSeed = require("shuffle-seed");
 
   let images;
   let clue;
+  let imageLoad = false
 
   useEffect(() => {
     axios.get("/connexions").then((response) => {
@@ -70,12 +72,24 @@ function Play() {
     return;
   }
 
+  const handleImageLoad = () => {
+    imageLoad = (true)
+    console.log(imageLoad)
+    console.log("loaded")
+  }
+
+  
+
   if (allConnexions[number]) {
     clue = allConnexions[number].clue;
     images = allConnexions[number].links.map((current, index) => {
       return (
         <div className='single-image-container'>
-          <img className='play-images' src={current} key={index} alt='img' />
+  
+        {
+          // <Loader style={{display: imageLoad === false ? "none" : "block"}} />
+        }
+          <img className='play-images' onLoad={handleImageLoad} src={current} key={index} alt='img' />
           <div className='play-images-number'>{index + 1}</div>
         </div>
       );
