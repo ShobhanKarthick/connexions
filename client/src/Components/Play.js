@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Menu, Close, } from "@material-ui/icons";
+import { Menu, Close } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
@@ -41,7 +41,7 @@ function Play() {
     return () => {
       if (window.location.pathname === "/") {
         console.log("back");
-        history.push("/popup")
+        history.push("/popup");
       }
     };
   }, [history]);
@@ -159,6 +159,19 @@ function Play() {
     }
   };
 
+  const holdOnInfo = () => {
+    if (20 - timer > 0) {
+      return (
+        <React.Fragment>
+          You can see the answer in {20 - timer} secs.
+          <br /> So, Hold your horses and think baby!!!
+        </React.Fragment>
+      );
+    } else {
+      return <React.Fragment>You can now see the answer !!!</React.Fragment>;
+    }
+  };
+
   const open = () => {
     document.getElementById("home-nav").style.display = "flex";
   };
@@ -175,9 +188,7 @@ function Play() {
         className='bg-overlay'
       />
       <div id='hold-on-info' className='hold-on-info'>
-        {" "}
-        You can see the answer in {20 - timer} secs.
-        <br /> So, Hold your horses and think baby!!!
+        {holdOnInfo()}
       </div>
 
       <div id='category-selection' className='category-selection'>
@@ -301,7 +312,7 @@ function Play() {
           id='play-answer'
           className='play-answer'
           type='text'
-          placeholder='Enter you answer'
+          placeholder='Enter your answer'
           value={userAnswer}
           onChange={userAnswerHandler}
           title='Enter your answer!'
