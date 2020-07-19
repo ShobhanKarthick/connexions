@@ -79,8 +79,8 @@ function Play() {
     console.log("loaded")
   }
 
-  const handleImageBroken = (id) => {
-    axios.put('/connexions/update/'+id, {blocked: true});
+  const handleImageBroken = () => {
+    axios.put('/connexions/update/'+allConnexions[number]._id, {blocked: true});
     setTimer(0);
     setNumber(number + 1);
     setErrorCount(errorCount+1);
@@ -92,7 +92,6 @@ function Play() {
 
   if (allConnexions[number]) {
     clue = allConnexions[number].clue;
-    let id = allConnexions[number]._id;
     images = allConnexions[number].links.map((current, index) => {
       return (
         <div className='single-image-container'>
@@ -100,7 +99,7 @@ function Play() {
         {
           // <Loader style={{display: imageLoad === false ? "none" : "block"}} />
         }
-          <img className='play-images' onLoad={handleImageLoad} src={current} key={index} alt='img' onError={() => {handleImageBroken(id)}} />
+          <img className='play-images' onLoad={handleImageLoad} src={current} key={index} alt='img' onError={handleImageBroken} />
           <div className='play-images-number'>{index + 1}</div>
         </div>
       );
@@ -125,6 +124,7 @@ function Play() {
       setTimer(0);
       setUserAnswer("");
       window.scrollTo(0, 100);
+      axios.put('/connexions/update/'+allConnexions[number]._id, {winCount: allConnexions[number].winCount+1});
     } else {
       document.getElementById("toast-incorrect").style.display = "block";
       window.setTimeout(function () {
@@ -139,6 +139,7 @@ function Play() {
     if (timer > 20) {
       document.getElementById("answer-display").style.display = "block";
       document.getElementById("bg-overlay").style.display = "block";
+      axios.put('/connexions/update/'+allConnexions[number]._id, {lossCount: allConnexions[number].lossCount+1});
     } else {
       document.getElementById("hold-on-info").style.display = "block";
     }
