@@ -2,10 +2,12 @@ const express = require('express')
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const path = require('path')
+const sslRedirect = require('heroku-ssl-redirect');
 
 const PORT = process.env.PORT || 4000;
 
 const app = express()
+app.use(sslRedirect())
 const connexionRoutes = express.Router()
 
 const mongoDB = 'mongodb://127.0.0.1/connexions';
