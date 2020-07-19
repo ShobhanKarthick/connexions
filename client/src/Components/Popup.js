@@ -21,7 +21,7 @@ function Popup() {
               className='icons'
               href='https://www.instagram.com/insti_connexions/'
             >
-              <div style={{display: "flex", justifyContent: "center", alignItems: "center", color: "#ffffff"}}><Instagram /> &nbsp; @insti_connexions</div> 
+              <span style={{display: "flex", justifyContent: "center", alignItems: "center", color: "#ffffff"}}><Instagram /> &nbsp; @insti_connexions</span> 
             </a>
           </p>
         </div>
