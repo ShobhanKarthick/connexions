@@ -11,6 +11,7 @@ function Play() {
   const [category, setCategory] = useState("");
   const [userAnswer, setUserAnswer] = useState("");
   const [number, setNumber] = useState(0);
+  const [errorCount, setErrorCount] = useState(0);
   const [random, setRandom] = useState("");
   const [executed, setExecuted] = useState(false);
   const [timer, setTimer] = useState(0);
@@ -25,7 +26,7 @@ function Play() {
   useEffect(() => {
     axios.get("/connexions").then((response) => {
       let results = response.data.filter((current) => {
-        return current.clue === category;
+        return current.clue === category && current.blocked === false;
       });
       let shuffle = shuffleSeed.shuffle(results, random);
       setAllConnexions(shuffle);
@@ -78,10 +79,20 @@ function Play() {
     console.log("loaded")
   }
 
+  const handleImageBroken = (id) => {
+    axios.put('/connexions/update/'+id, {blocked: true});
+    setTimer(0);
+    setNumber(number + 1);
+    setErrorCount(errorCount+1);
+    setUserAnswer("");
+    window.scrollTo(0, 100);
+  }
+
   
 
   if (allConnexions[number]) {
     clue = allConnexions[number].clue;
+    let id = allConnexions[number]._id;
     images = allConnexions[number].links.map((current, index) => {
       return (
         <div className='single-image-container'>
@@ -89,7 +100,7 @@ function Play() {
         {
           // <Loader style={{display: imageLoad === false ? "none" : "block"}} />
         }
-          <img className='play-images' onLoad={handleImageLoad} src={current} key={index} alt='img' />
+          <img className='play-images' onLoad={handleImageLoad} src={current} key={index} alt='img' onError={() => {handleImageBroken(id)}} />
           <div className='play-images-number'>{index + 1}</div>
         </div>
       );
@@ -303,7 +314,7 @@ function Play() {
         )}
 
         {number < allConnexions.length && (
-          <h1 className='play-page-head'>Connexion #{number + 1}</h1>
+          <h1 className='play-page-head'>Connexion #{number + 1 - errorCount}</h1>
         )}
         {
           //   <h1 id='play-sub-head' className='play-sub-head'>

@@ -13,6 +13,10 @@ const newConnexion = new Schema({
     links:{
         type: Array,
         required: true,
+    },
+    blocked:{
+        type: Boolean,
+        default: false,
     }
 
 })

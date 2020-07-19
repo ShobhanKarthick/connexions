@@ -46,6 +46,28 @@ connexionRoutes.route("/add").post((req, res) => {
         console.log(err)
     })
 })
+connexionRoutes.route('/edit/:id').get((req, res) => {
+  Connexion.findById(req.params.id,(error, data) => {
+    if (error){
+      return next(error)
+    } else {
+      res.json(data)
+    }
+  })
+})
+connexionRoutes.route('/update/:id').put((req, res, next) => {
+  Connexion.findByIdAndUpdate(req.params.id, {
+    $set: req.body
+  }, (error, data) => {
+    if (error){
+      return next(error);
+      console.log(error)
+    } else {
+      res.json(data)
+      console.log('Record updated successfully')
+    }
+  })
+})
 
 app.use("/connexions", connexionRoutes)
 
