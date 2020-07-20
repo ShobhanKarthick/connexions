@@ -18,9 +18,14 @@ function Play() {
   const history = useHistory();
   const shuffleSeed = require("shuffle-seed");
 
-  let images;
-  let clue;
-  let imageLoad = false
+  let images, clue;
+  let imageLoad = false;
+  let firstVisitCheck = localStorage.getItem("firstVisit")
+
+  if(!firstVisitCheck){
+    history.push("/tutorial")
+  }
+  else{}
 
   useEffect(() => {
     axios.get("/connexions").then((response) => {
@@ -316,10 +321,6 @@ function Play() {
         {images
           ? images
           : !(number === allConnexions.length) && <Loader id='loader' />}
-
-        {
-          // images
-        }
       </div>
       <form id='play-form' className='play-form' onSubmit={submitHandler}>
         <input

@@ -7,6 +7,7 @@ import About from './Components/About';
 import Upload from './Components/Upload';
 import HowToPlay from './Components/HowToPlay';
 import Popup from './Components/Popup';
+import Tutorial from './Components/Tutorial/Tutorial';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
       <Route path="/upload" exact component={Upload} />
       <Route path="/howtoplay" exact component={HowToPlay} />
       <Route path="/popup" exact component={Popup} />
+      <Route path="/tutorial" exact component={Tutorial} />
     </Router>
     
   );
