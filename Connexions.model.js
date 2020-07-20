@@ -13,8 +13,19 @@ const newConnexion = new Schema({
     links:{
         type: Array,
         required: true,
+    },
+    blocked:{
+        type: Boolean,
+        default: false,
+    },
+    winCount :{
+        type: Number,
+        default:0,
+    },
+    lossCount :{
+        type: Number,
+        default:0,
     }
-
 })
 
 module.exports = mongoose.model('connexions', newConnexion)
