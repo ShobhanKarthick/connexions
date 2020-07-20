@@ -3,7 +3,6 @@ import { Menu, Close } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
-import Loader from "./Loader";
 import generateHash from "random-hash";
 
 function Play() {
@@ -38,11 +37,14 @@ function Play() {
     });
   }, [allConnexions, category, random, shuffleSeed]);
 
-  useEffect(() => {
-    if(!(document.getElementsByClassName("single-image-container").length === 0)){
-      document.getElementById("loader").style.display = "none";
-    }
-  })
+
+      if(!(document.getElementsByClassName("single-image-container").length === 0)){
+        if(document.getElementById("loader")){
+
+          document.getElementById("loader").style.display = "none";
+        }
+      }
+    
 
   useEffect(() => {
     if (
@@ -106,10 +108,6 @@ function Play() {
     images = allConnexions[number].links.map((current, index) => {
       return (
         <div className='single-image-container' id="single-image-container">
-  
-        {
-          // <Loader style={{display: imageLoad === false ? "none" : "block"}} />
-        }
           <img className='play-images' onLoad={handleImageLoad} src={current} key={index} alt='img' onError={handleImageBroken} />
           <div className='play-images-number'>{index + 1}</div>
         </div>
@@ -338,7 +336,7 @@ function Play() {
       <div id='imgLinks' className='play-images-container'>
         {images}
       </div>
-        <Loader id='loader' />
+        <div className='loader' id='loader' />
 
       <form id='play-form' className='play-form' onSubmit={submitHandler}>
         <input
