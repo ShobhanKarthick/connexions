@@ -20,12 +20,21 @@ function Play() {
 
   let images, clue;
   let imageLoad = false;
-  let firstVisitCheck = localStorage.getItem("firstVisit")
+  // let firstVisitCheck = localStorage.getItem("firstVisit")
 
-  if(!firstVisitCheck){
-    history.push("/tutorial")
-  }
-  else{}
+  // if(!firstVisitCheck){
+  //   history.push("/tutorial")
+  // }
+  // else{}
+
+  useEffect(() => {
+    if (!executed) {
+      setRandom(generateHash({ length: 7 }));
+      setExecuted(true);
+      return;
+    }
+  })
+
 
   useEffect(() => {
     axios.get("/connexions").then((response) => {
@@ -78,12 +87,6 @@ function Play() {
     window.setTimeout(function () {
       document.getElementById("hold-on-info").style.display = "none";
     }, 3000);
-  }
-
-  if (!executed) {
-    setRandom(generateHash({ length: 7 }));
-    setExecuted(true);
-    return;
   }
 
   const handleImageLoad = () => {
