@@ -11,6 +11,7 @@ function Play() {
   const [category, setCategory] = useState("");
   const [userAnswer, setUserAnswer] = useState("");
   const [number, setNumber] = useState(0);
+  const [errorCount, setErrorCount] = useState(0);
   const [random, setRandom] = useState("");
   const [executed, setExecuted] = useState(false);
   const [timer, setTimer] = useState(0);
@@ -30,7 +31,7 @@ function Play() {
   useEffect(() => {
     axios.get("/connexions").then((response) => {
       let results = response.data.filter((current) => {
-        return current.clue === category;
+        return current.clue === category && current.blocked === false;
       });
       let shuffle = shuffleSeed.shuffle(results, random);
       setAllConnexions(shuffle);
@@ -83,6 +84,15 @@ function Play() {
     console.log("loaded")
   }
 
+  const handleImageBroken = () => {
+    axios.put('/connexions/update/'+allConnexions[number]._id, {blocked: true});
+    setTimer(0);
+    setNumber(number + 1);
+    setErrorCount(errorCount+1);
+    setUserAnswer("");
+    window.scrollTo(0, 100);
+  }
+
   
 
   if (allConnexions[number]) {
@@ -94,7 +104,7 @@ function Play() {
         {
           // <Loader style={{display: imageLoad === false ? "none" : "block"}} />
         }
-          <img className='play-images' onLoad={handleImageLoad} src={current} key={index} alt='img' />
+          <img className='play-images' onLoad={handleImageLoad} src={current} key={index} alt='img' onError={handleImageBroken} />
           <div className='play-images-number'>{index + 1}</div>
         </div>
       );
@@ -119,6 +129,7 @@ function Play() {
       setTimer(0);
       setUserAnswer("");
       window.scrollTo(0, 100);
+      axios.put('/connexions/update/'+allConnexions[number]._id, {winCount: allConnexions[number].winCount+1});
     } else {
       document.getElementById("toast-incorrect").style.display = "block";
       window.setTimeout(function () {
@@ -133,6 +144,7 @@ function Play() {
     if (timer > 20) {
       document.getElementById("answer-display").style.display = "block";
       document.getElementById("bg-overlay").style.display = "block";
+      axios.put('/connexions/update/'+allConnexions[number]._id, {lossCount: allConnexions[number].lossCount+1});
     } else {
       document.getElementById("hold-on-info").style.display = "block";
     }
@@ -308,7 +320,7 @@ function Play() {
         )}
 
         {number < allConnexions.length && (
-          <h1 className='play-page-head'>Connexion #{number + 1}</h1>
+          <h1 className='play-page-head'>Connexion #{number + 1 - errorCount}</h1>
         )}
         {
           //   <h1 id='play-sub-head' className='play-sub-head'>
