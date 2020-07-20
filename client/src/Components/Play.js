@@ -39,6 +39,12 @@ function Play() {
   }, [allConnexions, category, random, shuffleSeed]);
 
   useEffect(() => {
+    if(!(document.getElementsByClassName("single-image-container").length === 0)){
+      document.getElementById("loader").style.display = "none";
+    }
+  })
+
+  useEffect(() => {
     if (
       history.action === "PUSH" ||
       history.action === "POP" ||
@@ -88,7 +94,7 @@ function Play() {
     axios.put('/connexions/update/'+ allConnexions[number]._id, {blocked: true});
     setTimer(0);
     setNumber(number + 1);
-    setErrorCount(errorCount+1);
+    setErrorCount(errorCount + 1);
     setUserAnswer("");
     window.scrollTo(0, 100);
   }
@@ -99,7 +105,7 @@ function Play() {
     clue = allConnexions[number].clue;
     images = allConnexions[number].links.map((current, index) => {
       return (
-        <div className='single-image-container'>
+        <div className='single-image-container' id="single-image-container">
   
         {
           // <Loader style={{display: imageLoad === false ? "none" : "block"}} />
@@ -118,7 +124,7 @@ function Play() {
   const submitHandler = (event) => {
     event.preventDefault();
     if (
-      allConnexions[number].answer.toUpperCase() === userAnswer.toUpperCase()
+      allConnexions[number].answer.toUpperCase().replace(/\s/g,'') === userAnswer.toUpperCase().replace(/\s/g,'')
     ) {
       document.getElementById("toast-correct").style.display = "block";
       window.setTimeout(function () {
@@ -144,7 +150,7 @@ function Play() {
     if (timer > 20) {
       document.getElementById("answer-display").style.display = "block";
       document.getElementById("bg-overlay").style.display = "block";
-      axios.put('/connexions/update/'+allConnexions[number]._id, {lossCount: allConnexions[number].lossCount+1});
+      axios.put('/connexions/update/'+ allConnexions[number]._id, {lossCount: allConnexions[number].lossCount+1});
     } else {
       document.getElementById("hold-on-info").style.display = "block";
     }
@@ -330,10 +336,10 @@ function Play() {
       </div>
 
       <div id='imgLinks' className='play-images-container'>
-        {images
-          ? images
-          : !(number === allConnexions.length) && <Loader id='loader' />}
+        {images}
       </div>
+        <Loader id='loader' />
+
       <form id='play-form' className='play-form' onSubmit={submitHandler}>
         <input
           id='play-answer'
