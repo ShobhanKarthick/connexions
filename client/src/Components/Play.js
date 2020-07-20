@@ -33,27 +33,32 @@ function Play() {
       setExecuted(true);
       return;
     }
-  })
+  },[])
 
 
   useEffect(() => {
+    console.log(0)
     axios.get("/connexions").then((response) => {
+      console.log(1)
       let results = response.data.filter((current) => {
+        console.log(2)
         return current.clue === category && current.blocked === false;
       });
       let shuffle = shuffleSeed.shuffle(results, random);
+      console.log(3)
       setAllConnexions(shuffle);
+      console.log(4)
     });
   }, [allConnexions, category, random, shuffleSeed]);
 
 
-      if(!(document.getElementsByClassName("single-image-container").length === 0)){
-        if(document.getElementById("loader")){
+    if(!(document.getElementsByClassName("single-image-container").length === 0)){
+      if(document.getElementById("loader")){
 
-          document.getElementById("loader").style.display = "none";
-        }
+        document.getElementById("loader").style.display = "none";
       }
-    
+    }
+  
 
   useEffect(() => {
     if (
