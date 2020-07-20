@@ -91,7 +91,7 @@ function Upload() {
 
         {links.map((current, index) => {
           return (
-            <div className='links-input-container' key='index'>
+            <div className='links-input-container' key={index}>
               <div
                 style={{
                   display: "flex",
