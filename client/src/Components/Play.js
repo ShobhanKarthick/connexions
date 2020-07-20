@@ -85,7 +85,7 @@ function Play() {
   }
 
   const handleImageBroken = () => {
-    axios.put('/connexions/update/'+allConnexions[number]._id, {blocked: true});
+    axios.put('/connexions/update/'+ allConnexions[number]._id, {blocked: true});
     setTimer(0);
     setNumber(number + 1);
     setErrorCount(errorCount+1);
