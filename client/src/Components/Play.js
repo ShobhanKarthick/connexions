@@ -14,7 +14,6 @@ function Play() {
   const [random, setRandom] = useState("");
   const [executed, setExecuted] = useState(false);
   const [timer, setTimer] = useState(0);
-  // const [imageLoad, setImageLoad] = useState(null)
   const history = useHistory();
   const shuffleSeed = require("shuffle-seed");
 
@@ -37,16 +36,13 @@ function Play() {
 
 
   useEffect(() => {
-    console.log(0)
     //let v = {clue:category,blocked:{$in: [false,null]}}
     axios.post("/connexions/query",{clue:category}).then((response) => {
-      console.log(1,response)
       let results = response.data
       let shuffle = shuffleSeed.shuffle(results, random);
-      console.log(3,shuffle)
       setAllConnexions(shuffle);
-      console.log(4)
-    });
+    })
+    .catch(error => console.error(error))
   }, [category, random, shuffleSeed]);
 
 
@@ -329,15 +325,12 @@ function Play() {
           <h1 className='play-page-head'>Let's Connect... Shall we ?!</h1>
         )}
 
+        <h1 id='play-sub-head' className='play-sub-head'>{clue}</h1>
+
         {number < allConnexions.length && (
           // <h1 className='play-page-head'>Connexion #{number + 1 - errorCount}</h1>
           <h1 className='play-page-head'>Connexion #{number + 1}</h1>
         )}
-        {
-          //   <h1 id='play-sub-head' className='play-sub-head'>
-          //   Clue: {clue}
-          // </h1>
-        }
       </div>
 
       <div id='imgLinks' className='play-images-container'>

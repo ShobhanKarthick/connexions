@@ -1,22 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Add, Close } from "@material-ui/icons";
-import {useParams} from 'react-router-dom'
 
-function EditId() {
-  let params = useParams();
+function EditId(props) {
   const [clue, setClue] = useState('');
   const [answer, setAnswer] = useState('');
   const [links, setLinks] = useState([""]);
   const [blocked, setBlocked] = useState(false);
 
-  axios.get("/connexions/edit/"+params.id).then((response) => {
-    const data = response.data;
-    setClue(data.clue);
-    setLinks(data.links);
-    setAnswer(data.answer);
-    setBlocked(data.blocked);
-  });
+  useEffect(() => {
+    axios.get("/connexions/edit/"+ props.match.params._id)
+    .then((response) => {
+      const data = response.data;
+      setClue(data.clue);
+      setLinks(data.links);
+      setAnswer(data.answer);
+      setBlocked(data.blocked);
+    })
+    .catch(error => {
+      console.error(error)
+      console.log("record unavailable")
+    })
+  })
 
   const add = () => {
     setLinks([...links, ""]);
@@ -60,7 +65,7 @@ function EditId() {
     };
 
     axios
-      .post("/connexions/update/"+params._id, connexion)
+      .post("/connexions/update/"+props.match.params._id, connexion)
       .then((connexion) => {
         console.log("Connexion added");
         alert("Connexions Uploaded successfully");
@@ -141,16 +146,18 @@ function EditId() {
             </div>
           );
         })}
+        <div style={{display: "flex", flexDirection: "row",justifyContent: "center", alignItems: "center", width: "100%", marginBottom: "20px"}}>
         <input
-          style={{ marginBottom: "20px" }}
-          id='blocked-input'
-          className='upload-input'
-          type='checkbox'
-          value={blocked}
-          onChange={blockedHandler}
-          placeholder='Enter the answer'
-          required
-        />
+        style={{ width: "20px", height: "20px" }}
+        id='blocked-input'
+        className='upload-input'
+        type='checkbox'
+        value={blocked}
+        onChange={blockedHandler}
+        placeholder='Enter the answer'
+        required
+        /><label for="blocked-input"><p>Blocked Status</p></label>
+        </div>
         <button className='upload-button' for='upload-form' type='submit'>
           UPLOAD
         </button>

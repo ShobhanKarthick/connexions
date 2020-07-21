@@ -9,10 +9,8 @@ import generateHash from "random-hash";
 function PlayId() {
   let params = useParams();
   const [allConnexions, setAllConnexions] = useState("");
-  const [category, setCategory] = useState("");
   const [userAnswer, setUserAnswer] = useState("");
   const [number, setNumber] = useState(0);
-  const [errorCount, setErrorCount] = useState(0);
   const [random, setRandom] = useState("");
   const [executed, setExecuted] = useState(false);
   const [timer, setTimer] = useState(0);
@@ -97,16 +95,6 @@ function PlayId() {
     console.log("loaded")
   }
 
-  const handleImageBroken = () => {
-    axios.put('/connexions/update/'+ allConnexions[number]._id, {blocked: true});
-    setTimer(0);
-    setNumber(number + 1);
-    setErrorCount(errorCount + 1);
-    setUserAnswer("");
-    window.scrollTo(0, 100);
-  }
-
-  
 
   if (allConnexions[number]) {
     clue = allConnexions[number].clue;
@@ -282,7 +270,7 @@ function PlayId() {
         )}
 
         {number < allConnexions.length && (
-          <h1 className='play-page-head'>Connexion #{number + 1 - errorCount}</h1>
+          <h1 className='play-page-head'>Connexion #{number + 1}</h1>
         )}
         {
           //   <h1 id='play-sub-head' className='play-sub-head'>
