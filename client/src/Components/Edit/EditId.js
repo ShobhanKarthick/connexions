@@ -9,7 +9,7 @@ function EditId(props) {
   const [blocked, setBlocked] = useState(false);
 
   useEffect(() => {
-    axios.get("/connexions/edit/"+ props.match.params._id)
+    axios.get("/connexions/edit/"+ props.match.params.id)
     .then((response) => {
       const data = response.data;
       setClue(data.clue);
