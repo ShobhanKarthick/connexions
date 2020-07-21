@@ -42,7 +42,8 @@ function Play() {
       console.log(1)
       let results = response.data.filter((current) => {
         console.log(2)
-        return current.clue === category && current.blocked === false;
+        // return current.clue === category && current.blocked === false;
+        return current.clue === category
       });
       let shuffle = shuffleSeed.shuffle(results, random);
       console.log(3)
@@ -116,7 +117,7 @@ function Play() {
     images = allConnexions[number].links.map((current, index) => {
       return (
         <div className='single-image-container' id="single-image-container">
-          <img className='play-images' onLoad={handleImageLoad} src={current} key={index} alt='img' onError={handleImageBroken} />
+          <img className='play-images' onLoad={handleImageLoad} src={current} key={index} alt='img'/>
           <div className='play-images-number'>{index + 1}</div>
         </div>
       );
@@ -332,7 +333,8 @@ function Play() {
         )}
 
         {number < allConnexions.length && (
-          <h1 className='play-page-head'>Connexion #{number + 1 - errorCount}</h1>
+          // <h1 className='play-page-head'>Connexion #{number + 1 - errorCount}</h1>
+          <h1 className='play-page-head'>Connexion #{number + 1}</h1>
         )}
         {
           //   <h1 id='play-sub-head' className='play-sub-head'>
