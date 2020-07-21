@@ -330,7 +330,8 @@ function Play() {
         )}
 
         {number < allConnexions.length && (
-          <h1 className='play-page-head'>Connexion #{number + 1 - errorCount}</h1>
+          // <h1 className='play-page-head'>Connexion #{number + 1 - errorCount}</h1>
+          <h1 className='play-page-head'>Connexion #{number + 1}</h1>
         )}
         {
           //   <h1 id='play-sub-head' className='play-sub-head'>
