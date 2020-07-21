@@ -2,7 +2,10 @@ import React, { useState } from "react";
 import axios from "axios";
 import { Add, Close } from "@material-ui/icons";
 
-function Upload() {
+function Edit() {
+  axios.post("/connexions/query",{clue:'Movies'}).then((response) => {
+    console.log(response.data);
+  });
   const [clue, setClue] = useState('');
   const [answer, setAnswer] = useState('');
   const [links, setLinks] = useState([""]);
@@ -63,7 +66,7 @@ function Upload() {
 
   return (
     <div className='upload-page'>
-      <h1 className='upload-head'>Upload the connexion</h1>
+      <h1 className='upload-head'>View all connexion</h1>
       <form className='upload-form' id='upload-form' onSubmit={submitHandler}>
         <select
         style={{ marginBottom: "20px" }}
@@ -91,7 +94,7 @@ function Upload() {
 
         {links.map((current, index) => {
           return (
-            <div className='links-input-container' key={index}>
+            <div className='links-input-container' key='index'>
               <div
                 style={{
                   display: "flex",
@@ -134,4 +137,4 @@ function Upload() {
   );
 }
 
-export default Upload;
+export default Edit;

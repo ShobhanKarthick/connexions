@@ -1,11 +1,22 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Add, Close } from "@material-ui/icons";
+import {useParams} from 'react-router-dom'
 
-function Upload() {
+function EditId() {
+  let params = useParams();
   const [clue, setClue] = useState('');
   const [answer, setAnswer] = useState('');
   const [links, setLinks] = useState([""]);
+  const [blocked, setBlocked] = useState(false);
+
+  axios.get("/connexions/edit/"+params.id).then((response) => {
+    const data = response.data;
+    setClue(data.clue);
+    setLinks(data.links);
+    setAnswer(data.answer);
+    setBlocked(data.blocked);
+  });
 
   const add = () => {
     setLinks([...links, ""]);
@@ -29,6 +40,10 @@ function Upload() {
     setAnswer(event.target.value);
   };
 
+  const blockedHandler = (event) => {
+    setBlocked(event.target.value);
+  };
+
   const linksHandler = (event, index) => {
     let linksArray = [...links];
     linksArray[index] = event.target.value;
@@ -45,7 +60,7 @@ function Upload() {
     };
 
     axios
-      .post("/connexions/add", connexion)
+      .post("/connexions/update/"+params._id, connexion)
       .then((connexion) => {
         console.log("Connexion added");
         alert("Connexions Uploaded successfully");
@@ -63,7 +78,7 @@ function Upload() {
 
   return (
     <div className='upload-page'>
-      <h1 className='upload-head'>Upload the connexion</h1>
+      <h1 className='upload-head'>Edit the connexion</h1>
       <form className='upload-form' id='upload-form' onSubmit={submitHandler}>
         <select
         style={{ marginBottom: "20px" }}
@@ -126,6 +141,16 @@ function Upload() {
             </div>
           );
         })}
+        <input
+          style={{ marginBottom: "20px" }}
+          id='blocked-input'
+          className='upload-input'
+          type='checkbox'
+          value={blocked}
+          onChange={blockedHandler}
+          placeholder='Enter the answer'
+          required
+        />
         <button className='upload-button' for='upload-form' type='submit'>
           UPLOAD
         </button>
@@ -134,4 +159,4 @@ function Upload() {
   );
 }
 
-export default Upload;
+export default EditId;

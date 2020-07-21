@@ -15,7 +15,7 @@ mongoose.connect(process.env.MONGODB_URI || mongoDB, { useNewUrlParser: true, us
 
 const db = mongoose.connection;
 db.once("open", ()=> {
-    console.log("MongoDB connection establishd")
+	console.log("MongoDB connection establishd")
 })
 
 let Connexion = require("./Connexions.model")
@@ -23,75 +23,88 @@ let Connexion = require("./Connexions.model")
 app.use(bodyParser.json())
 
 connexionRoutes.route("/").get((req, res) => {
-    Connexion.find((err, connexion) => {
-        if(!connexion){
-            res.status(400)
-            console.log(err)
-            console.log("Database not found")
-        }
-        else{
-           return res.json(connexion)
-        }
-    })
+	Connexion.find((err, connexion) => {
+		if(!connexion){
+			res.status(400)
+			console.log(err)
+			console.log("Database not found")
+		}
+		else{
+			res.json(connexion)
+		}
+	})
 })
 
 connexionRoutes.route("/add").post((req, res) => {
-    let connexion = new Connexion(req.body)
+	let connexion = new Connexion(req.body)
 
-    connexion.save()
-    .then((connexion) => {
-        res.status(200).send("Connexion added successfully")
-    })
-    .catch(err => {
-        res.status(400).send("Connexion was not added")
-        console.log("Connexion was not added")
-        console.log(err)
-    })
+	connexion.save()
+	.then((connexion) => {
+		res.status(200).send("Connexion added successfully")
+	})
+	.catch(err => {
+		res.status(400).send("Connexion was not added")
+		console.log("Connexion was not added")
+		console.log(err)
+	})
+})
+connexionRoutes.route("/query").post((req, res) => {
+	let query = req.body;
+	Connexion.find(query, (err, connexion) => {
+		if(!connexion){
+			res.status(400)
+			console.log(err)
+			console.log("Database not found")
+		}
+		else{
+			res.json(connexion)
+		}
+	})
 })
 connexionRoutes.route('/edit/:id').get((req, res) => {
-  Connexion.findById(req.params.id,(error, data) => {
-    if (error){
-      return next(error)
-    } else {
-      res.json(data)
-    }
-  })
+	Connexion.findById(req.params.id,(error, data) => {
+		if (error){
+			return next(error)
+		} else {
+			res.json(data)
+		}
+	})
 })
 connexionRoutes.route('/update/:id').put((req, res, next) => {
-  Connexion.findByIdAndUpdate(req.params.id, {
-    $set: req.body
-  }, (error, data) => {
-    if (error){
-      return next(error);
-      console.log(error)
-    } else {
-      res.json(data)
-      console.log('Record updated successfully')
-    }
-  })
+	Connexion.findByIdAndUpdate(req.params.id, {
+		$set: req.body
+	}, (error, data) => {
+		if (error){
+			return next(error);
+			console.log(error)
+		} else {
+			res.json(data)
+			console.log('Record updated successfully')
+		}
+	})
 })
 
 app.use("/connexions", connexionRoutes)
 
 
 if (process.env.NODE_ENV === "production") {
-    app.use(express.static("client/build"));
-  
-    app.get("*", (req, res) => {
-      res.sendFile(path.join(__dirname, "client", "build", "index.html"));
-    });
-  }
+	app.use(express.static("client/build"));
+	
+	app.get("*", (req, res) => {
+		res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+	});
+}
 
-  app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "*");
-    next();
-  });
-  
-  app.use(express.urlencoded({
-    extended: false
-  }));
-  
+app.use((req, res, next) => {
+	res.header("Access-Control-Allow-Origin", "*");
+	next();
+});
+
+app.use(express.urlencoded({
+	extended: false
+}));
+
 
 app.listen(PORT, () => {
-    console.log("MongoDB running on PORT: " + PORT);
-  });
+	console.log("MongoDB running on PORT: " + PORT);
+});
