@@ -38,8 +38,9 @@ function Play() {
   useEffect(() => {
     //let v = {clue:category,blocked:{$in: [false,null]}}
     axios.post("/connexions/query",{clue:category}).then((response) => {
-      let results = response.data
+      let results = response.data;
       let shuffle = shuffleSeed.shuffle(results, random);
+      shuffle = [...shuffle].sort((a,b) => {return ((a.lossCount+1)/(a.winCount+1))-((b.lossCount+1)/(b.winCount+1))});
       setAllConnexions(shuffle);
     })
     .catch(error => console.error(error))
@@ -328,8 +329,7 @@ function Play() {
         <h1 id='play-sub-head' className='play-sub-head'>{clue}</h1>
 
         {number < allConnexions.length && (
-          // <h1 className='play-page-head'>Connexion #{number + 1 - errorCount}</h1>
-          <h1 className='play-page-head'>Connexion #{number + 1}</h1>
+          <h1 className='play-page-head'>Connexion #{number + 1 - errorCount}</h1>
         )}
       </div>
 
