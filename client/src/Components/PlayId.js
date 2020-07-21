@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Menu, Close } from "@material-ui/icons";
 import { Link } from "react-router-dom";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import axios from "axios";
 import generateHash from "random-hash";
 
-function Play() {
+
+function PlayId() {
+  let params = useParams();
   const [allConnexions, setAllConnexions] = useState("");
   const [category, setCategory] = useState("");
   const [userAnswer, setUserAnswer] = useState("");
@@ -38,16 +40,13 @@ function Play() {
 
   useEffect(() => {
     console.log(0)
-    //let v = {clue:category,blocked:{$in: [false,null]}}
-    axios.post("/connexions/query",{clue:category}).then((response) => {
+    axios.get("/connexions/edit/"+params.id).then((response) => {
       console.log(1,response)
-      let results = response.data
-      let shuffle = shuffleSeed.shuffle(results, random);
-      console.log(3,shuffle)
-      setAllConnexions(shuffle);
+      let results = [response.data]
+      setAllConnexions(results);
       console.log(4)
     });
-  }, [category, random, shuffleSeed]);
+  }, [random, shuffleSeed]);
 
 
     if(!(document.getElementsByClassName("single-image-container").length === 0)){
@@ -114,7 +113,7 @@ function Play() {
     images = allConnexions[number].links.map((current, index) => {
       return (
         <div className='single-image-container' id="single-image-container" key={index}>
-          <img className='play-images' onLoad={handleImageLoad} src={current} alt='img' onError={handleImageBroken} />
+          <img className='play-images' onLoad={handleImageLoad} src={current} alt='img' />
           <div className='play-images-number'>{index + 1}</div>
         </div>
       );
@@ -151,7 +150,7 @@ function Play() {
   const displayAnswer = (event) => {
     event.preventDefault();
 
-    if (timer > 20) {
+    if (timer > -1) {
       document.getElementById("answer-display").style.display = "block";
       document.getElementById("bg-overlay").style.display = "block";
       axios.put('/connexions/update/'+ allConnexions[number]._id, {lossCount: allConnexions[number].lossCount+1});
@@ -223,55 +222,8 @@ function Play() {
 
   return (
     <div className='play-page'>
-      <div
-        id='bg-dark-overlay'
-        style={{ display: "block", backgroundColor: "#080808" }}
-        className='bg-overlay'
-      />
       <div id='hold-on-info' className='hold-on-info'>
         {holdOnInfo()}
-      </div>
-
-      <div id='category-selection' className='category-selection'>
-        <h1>What category you wanna play in ?!</h1>
-        <div className='category-button-container'>
-          <button
-            className='category-button'
-            onClick={() => {
-              setTimer(0);
-              setCategory("Movies");
-              document.getElementById("bg-dark-overlay").style.display = "none";
-              document.getElementById("category-selection").style.display =
-                "none";
-            }}
-          >
-            Movies
-          </button>
-          <button
-            className='category-button'
-            onClick={() => {
-              setTimer(0);
-              setCategory("TV Series");
-              document.getElementById("bg-dark-overlay").style.display = "none";
-              document.getElementById("category-selection").style.display =
-                "none";
-            }}
-          >
-            TV Series
-          </button>
-          <button
-            className='category-button'
-            onClick={() => {
-              setTimer(0);
-              setCategory("Cartoons");
-              document.getElementById("bg-dark-overlay").style.display = "none";
-              document.getElementById("category-selection").style.display =
-                "none";
-            }}
-          >
-            Cartoons
-          </button>
-        </div>
       </div>
       <div className='head-container'>
         <div style={{ width: "100%", boxSizing: "border-box" }}>
@@ -375,4 +327,4 @@ function Play() {
   );
 }
 
-export default Play;
+export default PlayId;
