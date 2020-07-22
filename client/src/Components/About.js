@@ -36,8 +36,8 @@ function About() {
 
       <fieldset className='about-container'>
         <legend className='about-head'>Our Story</legend>
-        <div className='about-desc'>
-          Just a bunch of undergrads from IIT-M, who are connected by one
+        <div className='about-desc' style={{fontSize: "27px", lineHeight: 1.3,}}>
+          Just a bunch of undergrads from IIT Madras, who are connected by one
           interest, and that is connecting you folks through this supercool
           game! It all started one day when we started playing this game among
           ourselves, when we realised how fun it was and then decided to spread
