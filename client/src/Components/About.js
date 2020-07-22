@@ -85,7 +85,7 @@ function About() {
             />
             <div>
               <h2 className='name'>DEVA</h2>
-              <h5 className='position'>Not the Chosen One</h5>
+              <h5 className='position'>Not The Chosen One</h5>
             </div>
           </div>
           <div className='person'>
