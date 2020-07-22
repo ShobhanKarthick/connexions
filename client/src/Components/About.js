@@ -63,7 +63,7 @@ function About() {
             />
             <div>
               <h2 className='name'>SHOBHAN</h2>
-              <h5 className='position'>The Wild One</h5>
+              <h5 className='position'>Jack Of All Trades</h5>
             </div>
           </div>
           <div className='person'>
@@ -74,7 +74,7 @@ function About() {
             />
             <div>
               <h2 className='name'>VARSHINI</h2>
-              <h5 className='position'>The Crazy One</h5>
+              <h5 className='position'>The Crazy Alphysicst</h5>
             </div>
           </div>
           <div className='person'>
@@ -85,7 +85,7 @@ function About() {
             />
             <div>
               <h2 className='name'>DEVA</h2>
-              <h5 className='position'>Not The Chosen One</h5>
+              <h5 className='position'>The Robin Doood</h5>
             </div>
           </div>
           <div className='person'>
@@ -96,7 +96,7 @@ function About() {
             />
             <div>
               <h2 className='name'>SANJAY</h2>
-              <h5 className='position'>The Curious One</h5>
+              <h5 className='position'>Professor Sherlock</h5>
             </div>
           </div>
           <div className='person'>
@@ -107,7 +107,7 @@ function About() {
             />
             <div>
               <h2 className='name'>DEEPAK</h2>
-              <h5 className='position'>The Notorious One</h5>
+              <h5 className='position'>The Notorious Pirate</h5>
             </div>
           </div>
           <div className='person'>
@@ -118,7 +118,7 @@ function About() {
             />
             <div>
               <h2 className='name'>YOGHESH</h2>
-              <h5 className='position'>The Unique One</h5>
+              <h5 className='position'>The Insane Bold</h5>
             </div>
           </div>
         </div>
