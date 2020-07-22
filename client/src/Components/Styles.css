@@ -317,6 +317,7 @@ a {
 .position {
   font-weight: normal;
   font-family: Nexa-Regular;
+  line-height: 1.6;
 }
 
 @media only screen and (max-width: 600px) {
@@ -358,6 +359,9 @@ a {
 
   .name {
     font-size: 35px;
+  }
+  .position{
+    font-size: 19.25px;
   }
 
   .name,
