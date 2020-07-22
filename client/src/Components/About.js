@@ -36,7 +36,7 @@ function About() {
 
       <fieldset className='about-container'>
         <legend className='about-head'>Our Story</legend>
-        <div className='about-desc' style={{fontSize: "27px", lineHeight: 1.6,}}>
+        <div className='about-desc' style={{fontSize: "27px", lineHeight: 1.4,}}>
           Just a bunch of undergrads from IIT Madras, who are connected by one
           interest, and that is connecting you folks through this supercool
           game! It all started one day when we started playing this game among
