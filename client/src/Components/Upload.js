@@ -77,6 +77,9 @@ function Upload() {
         <option className="upload-input-option" value="Movies">Movies</option>
         <option className="upload-input-option" value="TV Series">TV Series</option>
         <option className="upload-input-option" value="Cartoons">Cartoons</option>
+        <option className="upload-input-option" value="Cities">Cities</option>
+        <option className="upload-input-option" value="Books">Books</option>
+        <option className="upload-input-option" value="Celebrities">Games</option>
         </select>
         <input
           style={{ marginBottom: "20px" }}
