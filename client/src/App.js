@@ -11,6 +11,8 @@ import Popup from './Components/Popup';
 import Tutorial from './Components/Tutorial/Tutorial';
 import Edit from './Components/Edit/Edit';
 import EditId from './Components/Edit/EditId';
+import UploadTamilEvent from './Components/UploadTamilEvent'
+import PlayTamilEvent from './Components/PlayTamilEvent'
 
 function App() {
   return (
@@ -20,6 +22,8 @@ function App() {
       <Route path="/play/id/:id" exact component={PlayId} />
       <Route path="/about" exact component={About} />
       <Route path="/upload" exact component={Upload} />
+      <Route path="/tamilevent" exact component={UploadTamilEvent} />
+      <Route path="/playtamilevent" exact component={PlayTamilEvent} />
       <Route path="/howtoplay" exact component={HowToPlay} />
       <Route path="/popup" exact component={Popup} />
       <Route path="/tutorial" exact component={Tutorial} />

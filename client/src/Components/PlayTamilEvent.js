@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom";
 import axios from "axios";
 import generateHash from "random-hash";
 
-function Play() {
+function PlayTamilEvent() {
   const [allConnexions, setAllConnexions] = useState("");
   const [category, setCategory] = useState("");
   const [userAnswer, setUserAnswer] = useState("");
@@ -236,73 +236,13 @@ function Play() {
             className='category-button'
             onClick={() => {
               setTimer(0);
-              setCategory("Movies");
+              setCategory("TamilEvent");
               document.getElementById("bg-dark-overlay").style.display = "none";
               document.getElementById("category-selection").style.display =
                 "none";
             }}
           >
-            Movies
-          </button>
-          <button
-            className='category-button'
-            onClick={() => {
-              setTimer(0);
-              setCategory("TV Series");
-              document.getElementById("bg-dark-overlay").style.display = "none";
-              document.getElementById("category-selection").style.display =
-                "none";
-            }}
-          >
-            TV Series
-          </button>
-          <button
-            className='category-button'
-            onClick={() => {
-              setTimer(0);
-              setCategory("Cartoons");
-              document.getElementById("bg-dark-overlay").style.display = "none";
-              document.getElementById("category-selection").style.display =
-                "none";
-            }}
-          >
-            Cartoons
-          </button>
-          <button
-            className='category-button'
-            onClick={() => {
-              setTimer(0);
-              setCategory("Cities");
-              document.getElementById("bg-dark-overlay").style.display = "none";
-              document.getElementById("category-selection").style.display =
-                "none";
-            }}
-          >
-            Cities
-          </button>
-          <button
-            className='category-button'
-            onClick={() => {
-              setTimer(0);
-              setCategory("Books");
-              document.getElementById("bg-dark-overlay").style.display = "none";
-              document.getElementById("category-selection").style.display =
-                "none";
-            }}
-          >
-            Books
-          </button>
-          <button
-            className='category-button'
-            onClick={() => {
-              setTimer(0);
-              setCategory("Games");
-              document.getElementById("bg-dark-overlay").style.display = "none";
-              document.getElementById("category-selection").style.display =
-                "none";
-            }}
-          >
-            Games
+            Tamil Event
           </button>
         </div>
       </div>
@@ -375,21 +315,8 @@ function Play() {
         <div className='loader' id='loader' />
 
       <form id='play-form' className='play-form' onSubmit={submitHandler}>
-        <input
-          id='play-answer'
-          className='play-answer'
-          type='text'
-          placeholder='Enter your answer'
-          value={userAnswer}
-          onChange={userAnswerHandler}
-          title='Enter your answer!'
-          required
-        />
         <div id='button-container' className='button-container'>
-          <button id='connect' className='answer-button' type='submit'>
-            CONNECT
-          </button>
-          {number < allConnexions.length && (
+       {number < allConnexions.length && (
             <button
               id='show-answer'
               className='answer-button'
@@ -405,4 +332,4 @@ function Play() {
   );
 }
 
-export default Play;
+export default PlayTamilEvent;
