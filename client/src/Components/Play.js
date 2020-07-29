@@ -268,42 +268,44 @@ function Play() {
           >
             Cartoons
           </button>
-          <button
-            className='category-button'
-            onClick={() => {
-              setTimer(0);
-              setCategory("Cities");
-              document.getElementById("bg-dark-overlay").style.display = "none";
-              document.getElementById("category-selection").style.display =
-                "none";
-            }}
-          >
-            Cities
-          </button>
-          <button
-            className='category-button'
-            onClick={() => {
-              setTimer(0);
-              setCategory("Books");
-              document.getElementById("bg-dark-overlay").style.display = "none";
-              document.getElementById("category-selection").style.display =
-                "none";
-            }}
-          >
-            Books
-          </button>
-          <button
-            className='category-button'
-            onClick={() => {
-              setTimer(0);
-              setCategory("Games");
-              document.getElementById("bg-dark-overlay").style.display = "none";
-              document.getElementById("category-selection").style.display =
-                "none";
-            }}
-          >
-            Games
-          </button>
+{
+          //   <button
+          //   className='category-button'
+          //   onClick={() => {
+          //     setTimer(0);
+          //     setCategory("Cities");
+          //     document.getElementById("bg-dark-overlay").style.display = "none";
+          //     document.getElementById("category-selection").style.display =
+          //       "none";
+          //   }}
+          // >
+          //   Cities
+          // </button>
+          // <button
+          //   className='category-button'
+          //   onClick={() => {
+          //     setTimer(0);
+          //     setCategory("Books");
+          //     document.getElementById("bg-dark-overlay").style.display = "none";
+          //     document.getElementById("category-selection").style.display =
+          //       "none";
+          //   }}
+          // >
+          //   Books
+          // </button>
+          // <button
+          //   className='category-button'
+          //   onClick={() => {
+          //     setTimer(0);
+          //     setCategory("Games");
+          //     document.getElementById("bg-dark-overlay").style.display = "none";
+          //     document.getElementById("category-selection").style.display =
+          //       "none";
+          //   }}
+          // >
+          //   Games
+          // </button>
+        }
         </div>
       </div>
       <div className='head-container'>
