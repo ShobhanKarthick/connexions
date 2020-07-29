@@ -170,8 +170,8 @@ function PlayTamilEvent() {
     if (allConnexions[number - 1]) {
       if (number === allConnexions.length) {
         // document.getElementById("play-sub-head").style.display = "none";
-        document.getElementById("play-answer").style.display = "none";
-        document.getElementById("connect").style.display = "none";
+        // document.getElementById("play-answer").style.display = "none";
+        // document.getElementById("connect").style.display = "none";
         return (
           <div
             style={{
@@ -301,8 +301,9 @@ function PlayTamilEvent() {
         {number === 0 && (
           <h1 className='play-page-head'>Let's Connect... Shall we ?!</h1>
         )}
-
-        <h1 id='play-sub-head' className='play-sub-head'>{clue}</h1>
+          {
+            // <h1 id='play-sub-head' className='play-sub-head'>{clue}</h1>
+          }
 
         {number < allConnexions.length && (
           <h1 className='play-page-head'>Connexion #{number + 1 - errorCount}</h1>
