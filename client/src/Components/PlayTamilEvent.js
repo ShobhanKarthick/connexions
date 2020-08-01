@@ -147,14 +147,9 @@ function PlayTamilEvent() {
 
   const displayAnswer = (event) => {
     event.preventDefault();
-
-    if (timer > 20) {
-      document.getElementById("answer-display").style.display = "block";
-      document.getElementById("bg-overlay").style.display = "block";
-      axios.put('/connexions/update/'+ allConnexions[number]._id, {lossCount: allConnexions[number].lossCount+1});
-    } else {
-      document.getElementById("hold-on-info").style.display = "block";
-    }
+    document.getElementById("answer-display").style.display = "block";
+    document.getElementById("bg-overlay").style.display = "block";
+    axios.put('/connexions/update/'+ allConnexions[number]._id, {lossCount: allConnexions[number].lossCount+1});
   };
 
   const postAnswerDisplay = () => {
