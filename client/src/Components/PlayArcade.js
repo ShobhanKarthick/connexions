@@ -44,6 +44,22 @@ function Play() {
     }
   },[])
 
+  
+  useEffect(() => {
+    if (
+      history.action === "PUSH" ||
+      history.action === "POP" ||
+      history.action === "REPLACE"
+    ) {
+    } else {
+    }
+    return () => {
+      if (window.location.pathname === "/") {
+        console.log("back");
+        history.push("/leaderboard");
+      }
+    };
+  }, [history]);
 
   useEffect(() => {
     axios.get("/connexions")
