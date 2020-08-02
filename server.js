@@ -21,7 +21,6 @@ db.once("open", ()=> {
 
 let Connexion = require("./Models/Connexions.model")
 let User = require("./Models/User.model");
-const { update } = require('./Models/Connexions.model');
 
 app.use(bodyParser.json())
 

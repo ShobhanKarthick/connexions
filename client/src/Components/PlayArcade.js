@@ -44,23 +44,6 @@ function Play() {
     }
   },[])
 
-  
-  useEffect(() => {
-    if (
-      history.action === "PUSH" ||
-      history.action === "POP" ||
-      history.action === "REPLACE"
-    ) {
-    } else {
-    }
-    return () => {
-      if (window.location.pathname === "/") {
-        console.log("back");
-        history.push("/leaderboard");
-      }
-    };
-  }, [history]);
-
   useEffect(() => {
     axios.get("/connexions")
     .then((response) => {
@@ -83,6 +66,24 @@ function Play() {
       document.getElementById("bg-overlay").style.display = "block"
     }
 
+    useEffect(() => {
+      if(timer === 6){
+      document.getElementById("hold-on-info").style.display = "block";
+      }
+      if(timer === 71){
+        document.getElementById("hold-on-info").style.display = "block";
+      }
+      if(timer === 131){
+        document.getElementById("hold-on-info").style.display = "block";
+      }
+      if(timer === 161){
+        document.getElementById("hold-on-info").style.display = "block";
+      }
+      if(timer === 181){
+        document.getElementById("hold-on-info").style.display = "block";
+      }
+    })
+
   useEffect(() => {
     if (
       history.action === "PUSH" ||
@@ -94,7 +95,7 @@ function Play() {
     return () => {
       if (window.location.pathname === "/") {
         console.log("back");
-        history.push("/popup");
+        history.push("/leaderboard");
       }
     };
   }, [history]);
@@ -205,17 +206,47 @@ function Play() {
   };
 
   const holdOnInfo = () => {
-    if (20 - timer > 0) {
+    if (timer < 10) {
       return (
         <React.Fragment>
-          You can see the answer in {20 - timer} secs.
-          <br /> So, Hold your horses and think baby!!!
+          Your 3-minute countdown has begun.
+          <br /> So, buckle up dude!!!
         </React.Fragment>
       );
-    } else {
-      return <React.Fragment>You can now see the answer !!!</React.Fragment>;
+    } 
+    if (timer > 70 && timer < 129) {
+      return (
+        <React.Fragment>
+          1 minute is up...
+          <br /> Come on hurry up!!!
+        </React.Fragment>
+      );
     }
-  };
+    if (timer > 130 && timer < 159) {
+      return (
+        <React.Fragment>
+          2 minutes up...
+          <br /> Catch up with your friends!!!
+        </React.Fragment>
+      );
+    }
+    if (timer > 160 && timer < 179) {
+      return (
+        <React.Fragment>
+        Your final 30 seconds
+          <br /> Pull yourself together!!!
+        </React.Fragment>
+      );
+    }
+      if (timer > 180) {
+        return (
+          <React.Fragment>
+          Your last 10 seconds
+            <br /> Buckle Up!!!
+          </React.Fragment>
+        );
+      }
+    };
 
   const open = () => {
     document.getElementById("home-nav").style.display = "flex";
