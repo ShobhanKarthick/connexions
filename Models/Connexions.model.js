@@ -28,6 +28,6 @@ const newConnexion = new Schema({
     }
 })
 
-module.exports = mongoose.model('connexions', newConnexion)
+module.exports = mongoose.model('Connexions', newConnexion)
 
 

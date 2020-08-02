@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Menu, Close } from "@material-ui/icons";
+import { Menu, Close, Timer } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
@@ -7,7 +7,8 @@ import generateHash from "random-hash";
 
 function Play() {
   const [allConnexions, setAllConnexions] = useState("");
-  const [category, setCategory] = useState("");
+  const [user, setUser] = useState('')
+  const [score, setScore] = useState(0)
   const [userAnswer, setUserAnswer] = useState("");
   const [number, setNumber] = useState(0);
   const [errorCount, setErrorCount] = useState(0);
@@ -18,13 +19,22 @@ function Play() {
   const shuffleSeed = require("shuffle-seed");
 
   let images, clue;
-  let imageLoad = false;
-  // let firstVisitCheck = localStorage.getItem("firstVisit")
 
-  // if(!firstVisitCheck){
-  //   history.push("/tutorial")
-  // }
-  // else{}
+  useEffect(() => {
+    if(localStorage.getItem('name')){
+    axios.post("/users/query", {name: localStorage.getItem('name')})
+    .then(response => {
+        let user = response.data
+        setUser(user[0])
+        setScore(user[0].score)
+    })
+    .catch(err => console.log(err))
+    }
+    else{
+        history.push("/")
+    }
+
+  }, [])
 
   useEffect(() => {
     if (!executed) {
@@ -36,15 +46,13 @@ function Play() {
 
 
   useEffect(() => {
-    //let v = {clue:category,blocked:{$in: [false,null]}}
-    axios.post("/connexions/query",{clue:category}).then((response) => {
-      let results = response.data;
-      let shuffle = shuffleSeed.shuffle(results, random);
-      // shuffle = [...shuffle].sort((a,b) => {return ((a.lossCount+1)/(a.winCount+1))-((b.lossCount+1)/(b.winCount+1))});
+    axios.get("/connexions")
+    .then((response) => {
+      let shuffle = shuffleSeed.shuffle(response.data, random);
       setAllConnexions(shuffle);
     })
     .catch(error => console.error(error))
-  }, [category, random, shuffleSeed]);
+  }, [random, shuffleSeed]);
 
 
     if(!(document.getElementsByClassName("single-image-container").length === 0)){
@@ -54,6 +62,10 @@ function Play() {
       }
     }
   
+    if(timer > 10){
+      document.getElementById("time-up-display").style.display = "flex"
+      document.getElementById("bg-overlay").style.display = "block"
+    }
 
   useEffect(() => {
     if (
@@ -89,29 +101,20 @@ function Play() {
     }, 3000);
   }
 
-  const handleImageLoad = () => {
-    imageLoad = (true)
-    console.log(imageLoad)
-    console.log("loaded")
-  }
-
   const handleImageBroken = () => {
     axios.put('/connexions/update/'+ allConnexions[number]._id, {blocked: true});
-    setTimer(0);
     setNumber(number + 1);
     setErrorCount(errorCount + 1);
     setUserAnswer("");
     window.scrollTo(0, 100);
   }
 
-  
-
   if (allConnexions[number]) {
     clue = allConnexions[number].clue;
     images = allConnexions[number].links.map((current, index) => {
       return (
         <div className='single-image-container' id="single-image-container" key={index}>
-          <img className='play-images' onLoad={handleImageLoad} src={current} alt='img' onError={handleImageBroken} />
+          <img className='play-images' src={current} alt='img' onError={handleImageBroken} />
           <div className='play-images-number'>{index + 1}</div>
         </div>
       );
@@ -133,10 +136,12 @@ function Play() {
       }, 3000);
 
       setNumber(number + 1);
-      setTimer(0);
+      setScore(score + 1);
       setUserAnswer("");
       window.scrollTo(0, 100);
-      axios.put('/connexions/update/'+allConnexions[number]._id, {winCount: allConnexions[number].winCount+1});
+      axios.put('/connexions/update/'+allConnexions[number]._id, {winCount: allConnexions[number].winCount+1})
+      axios.put('/users/update/' + user._id, {score: (score + 1)})
+      .catch(err => console.log(err))
     } else {
       document.getElementById("toast-incorrect").style.display = "block";
       window.setTimeout(function () {
@@ -145,22 +150,8 @@ function Play() {
     }
   };
 
-  const displayAnswer = (event) => {
-    event.preventDefault();
-
-    if (timer > 20) {
-      document.getElementById("answer-display").style.display = "block";
-      document.getElementById("bg-overlay").style.display = "block";
-      axios.put('/connexions/update/'+ allConnexions[number]._id, {lossCount: allConnexions[number].lossCount+1});
-    } else {
-      document.getElementById("hold-on-info").style.display = "block";
-    }
-  };
-
-  const postAnswerDisplay = () => {
-    document.getElementById("answer-display").style.display = "none";
-    document.getElementById("bg-overlay").style.display = "none";
-    setTimer(0);
+  const nextButton = (event) => {
+    event.preventDefault()
     setNumber(number + 1);
     setUserAnswer("");
     window.scrollTo(0, 100);
@@ -220,94 +211,21 @@ function Play() {
 
   return (
     <div className='play-page'>
-      <div
-        id='bg-dark-overlay'
-        style={{ display: "block", backgroundColor: "#080808" }}
-        className='bg-overlay'
-      />
       <div id='hold-on-info' className='hold-on-info'>
         {holdOnInfo()}
       </div>
-
-      <div id='category-selection' className='category-selection'>
-        <h1>What category you wanna play in ?!</h1>
-        <div className='category-button-container'>
-          <button
-            className='category-button'
-            onClick={() => {
-              setTimer(0);
-              setCategory("Movies");
-              document.getElementById("bg-dark-overlay").style.display = "none";
-              document.getElementById("category-selection").style.display =
-                "none";
-            }}
-          >
-            Movies
-          </button>
-          <button
-            className='category-button'
-            onClick={() => {
-              setTimer(0);
-              setCategory("TV Series");
-              document.getElementById("bg-dark-overlay").style.display = "none";
-              document.getElementById("category-selection").style.display =
-                "none";
-            }}
-          >
-            TV Series
-          </button>
-          <button
-            className='category-button'
-            onClick={() => {
-              setTimer(0);
-              setCategory("Cartoons");
-              document.getElementById("bg-dark-overlay").style.display = "none";
-              document.getElementById("category-selection").style.display =
-                "none";
-            }}
-          >
-            Cartoons
-          </button>
-{
-          //   <button
-          //   className='category-button'
-          //   onClick={() => {
-          //     setTimer(0);
-          //     setCategory("Cities");
-          //     document.getElementById("bg-dark-overlay").style.display = "none";
-          //     document.getElementById("category-selection").style.display =
-          //       "none";
-          //   }}
-          // >
-          //   Cities
-          // </button>
-          // <button
-          //   className='category-button'
-          //   onClick={() => {
-          //     setTimer(0);
-          //     setCategory("Books");
-          //     document.getElementById("bg-dark-overlay").style.display = "none";
-          //     document.getElementById("category-selection").style.display =
-          //       "none";
-          //   }}
-          // >
-          //   Books
-          // </button>
-          // <button
-          //   className='category-button'
-          //   onClick={() => {
-          //     setTimer(0);
-          //     setCategory("Games");
-          //     document.getElementById("bg-dark-overlay").style.display = "none";
-          //     document.getElementById("category-selection").style.display =
-          //       "none";
-          //   }}
-          // >
-          //   Games
-          // </button>
-        }
+      <div id='time-up-display' className='time-up-display'>
+        <h1>TIME UP !!!</h1>
+        <Timer />
+        <div>
+        <div className="time-up-buttons" style={{ padding: "10px"}} onClick={() => window.location.reload()} > PLAY AGAIN </div>
+        <div className="time-up-buttons">
+        
+        <Link  style={{ padding: "10px", color: "#4ca541"}} to="/leaderboard"> OHH DAMN! </Link>
+        </div>
         </div>
       </div>
+    
       <div className='head-container'>
         <div style={{ width: "100%", boxSizing: "border-box" }}>
           <h1 id='home-head' className='home-head'>
@@ -326,7 +244,6 @@ function Play() {
         />
         <Link to='/'>HOME</Link>
         <Link to='/howtoplay'>HOW TO PLAY</Link>
-        <Link to='/leaderboard'>LEADERBOARD</Link>
         <Link to='/about'>ABOUT US</Link>
       </div>
       <div className='bg-overlay' id='bg-overlay' />
@@ -335,22 +252,6 @@ function Play() {
       </div>
       <div id='toast-incorrect' className='toast-incorrect'>
         Sorry! Your answer is wrong
-      </div>
-      <div id='answer-display' className='answer-display'>
-        <div>Connexion Genius is laughing at you!</div>
-        <br />
-        <span>It's </span>{" "}
-        <span style={{ fontFamily: "Nexa-Bold" }}>
-          {allConnexions[number] && allConnexions[number].answer}
-        </span>
-        <br />
-        <br />
-        <div
-          onClick={postAnswerDisplay}
-          style={{ color: "#0074d9", float: "right", cursor: "pointer" }}
-        >
-          OHH DAMN!
-        </div>
       </div>
 
       <div
@@ -362,15 +263,16 @@ function Play() {
         }}
       >
         {number === 0 && (
-          <h1 className='play-page-head'>Let's Connect... Shall we ?!</h1>
+          <h1 style={{textAlign: "center"}} className='play-page-head'>Connect your brain to power ! <br />Connexions coming up...</h1>
         )}
-
-        <h1 id='play-sub-head' className='play-sub-head'>{clue}</h1>
 
         {number < allConnexions.length && (
           <h1 className='play-page-head'>Connexion #{number + 1 - errorCount}</h1>
         )}
-      </div>
+
+        <h1 id='play-sub-head' className='play-sub-head'>{clue}</h1>
+
+    </div>
 
       <div id='imgLinks' className='play-images-container'>
         {images}
@@ -393,13 +295,7 @@ function Play() {
             CONNECT
           </button>
           {number < allConnexions.length && (
-            <button
-              id='show-answer'
-              className='answer-button'
-              onClick={displayAnswer}
-            >
-              SHOW ANSWER
-            </button>
+            <button id='next-button' className='answer-button' onClick={nextButton} > NEXT </button>
           )}
           {lastPage()}
         </div>

@@ -32,16 +32,10 @@ function HowToPlay() {
         />
         <Link to='/'>HOME</Link>
         <Link to='/play'>PLAY</Link>
+        <Link to='/leaderboard'>LEADERBOARD</Link>
         <Link to='/about'>ABOUT US</Link>
       </div>
       <div className='steps-container'>
-        {
-          // <div className="howto-iframe" >
-          // <div>
-          // <iframe src="/play" title="Play page" frameborder="0" allowFullScreen={false} />
-          // </div>
-          // </div>
-        }
         <div>
           <img src={img} width='90%' alt='howtoplay' />
         </div>
