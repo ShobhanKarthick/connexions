@@ -62,7 +62,7 @@ function Play() {
       }
     }
   
-    if(timer > 10){
+    if(timer > 190){
       document.getElementById("time-up-display").style.display = "flex"
       document.getElementById("bg-overlay").style.display = "block"
     }
