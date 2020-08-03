@@ -84,7 +84,7 @@ function Play() {
         document.getElementById("hold-on-info").style.display = "block";
       }
       if(timer === 180){
-        document.getElementById("hold-on-info").style.display = "none";
+        document.getElementById("timer-field").style.display = "none";
       }
     })
 
