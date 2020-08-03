@@ -17,6 +17,7 @@ function Play() {
   const [timer, setTimer] = useState(0);
   const history = useHistory();
   const shuffleSeed = require("shuffle-seed");
+  const humanizeDuration = require("humanize-duration");
 
   let images, clue;
 
@@ -61,7 +62,7 @@ function Play() {
       }
     }
   
-    if(timer > 190){
+    if(timer > 180){
       document.getElementById("time-up-display").style.display = "flex"
       document.getElementById("bg-overlay").style.display = "block"
     }
@@ -70,17 +71,20 @@ function Play() {
       if(timer === 6){
       document.getElementById("hold-on-info").style.display = "block";
       }
-      if(timer === 71){
+      if(timer === 61){
         document.getElementById("hold-on-info").style.display = "block";
       }
-      if(timer === 131){
+      if(timer === 121){
         document.getElementById("hold-on-info").style.display = "block";
       }
-      if(timer === 161){
+      if(timer === 151){
         document.getElementById("hold-on-info").style.display = "block";
       }
-      if(timer === 181){
+      if(timer === 171){
         document.getElementById("hold-on-info").style.display = "block";
+      }
+      if(timer === 180){
+        document.getElementById("hold-on-info").style.display = "none";
       }
     })
 
@@ -214,7 +218,7 @@ function Play() {
         </React.Fragment>
       );
     } 
-    if (timer > 70 && timer < 129) {
+    if (timer > 60 && timer < 119) {
       return (
         <React.Fragment>
           1 minute is up...
@@ -222,7 +226,7 @@ function Play() {
         </React.Fragment>
       );
     }
-    if (timer > 130 && timer < 159) {
+    if (timer > 120 && timer < 149) {
       return (
         <React.Fragment>
           2 minutes up...
@@ -230,7 +234,7 @@ function Play() {
         </React.Fragment>
       );
     }
-    if (timer > 160 && timer < 179) {
+    if (timer > 150 && timer < 169) {
       return (
         <React.Fragment>
         Your final 30 seconds
@@ -238,7 +242,7 @@ function Play() {
         </React.Fragment>
       );
     }
-      if (timer > 180) {
+      if (timer > 170) {
         return (
           <React.Fragment>
           Your last 10 seconds
@@ -312,6 +316,16 @@ function Play() {
         {number === 0 && (
           <h1 style={{textAlign: "center"}} className='play-page-head'>Connect your brain to power ! <br />Connexions coming up...</h1>
         )}
+
+      {
+        (timer > 169) ?
+        <p id="timer-field" style={{backgroundColor: "#ff0000", padding: "10px", borderRadius: "3px", margin: "5px"}}>
+        Your last {humanizeDuration(((180 - timer) * 1000),{delimiter: "  "})} 
+        </p> :
+        <p style={{backgroundColor: "#4ca541", padding: "10px", borderRadius: "3px", margin: "5px"}}>
+        {humanizeDuration(((180 - timer) * 1000),{delimiter: "  "})} left
+        </p>
+      }
 
         {number < allConnexions.length && (
           <h1 className='play-page-head'>Connexion #{number + 1 - errorCount}</h1>
