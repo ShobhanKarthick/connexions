@@ -4,10 +4,10 @@ import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import generateHash from "random-hash";
+import dataset from "./Dataset"
 
-function PlayTamilEvent() {
-  const [allConnexions, setAllConnexions] = useState("");
-  const [category, setCategory] = useState("");
+function Play() {
+  const [allConnexions, setAllConnexions] = useState(dataset);
   const [userAnswer, setUserAnswer] = useState("");
   const [number, setNumber] = useState(0);
   const [errorCount, setErrorCount] = useState(0);
@@ -36,15 +36,10 @@ function PlayTamilEvent() {
 
 
   useEffect(() => {
-    //let v = {clue:category,blocked:{$in: [false,null]}}
-    axios.post("/connexions/query",{clue:category}).then((response) => {
-      let results = response.data;
+      let results = allConnexions;
       let shuffle = shuffleSeed.shuffle(results, random);
-      // shuffle = [...shuffle].sort((a,b) => {return ((a.lossCount+1)/(a.winCount+1))-((b.lossCount+1)/(b.winCount+1))});
       setAllConnexions(shuffle);
-    })
-    .catch(error => console.error(error))
-  }, [category, random, shuffleSeed]);
+    }, [random, shuffleSeed]);
 
 
     if(!(document.getElementsByClassName("single-image-container").length === 0)){
@@ -96,7 +91,6 @@ function PlayTamilEvent() {
   }
 
   const handleImageBroken = () => {
-    axios.put('/connexions/update/'+ allConnexions[number]._id, {blocked: true});
     setTimer(0);
     setNumber(number + 1);
     setErrorCount(errorCount + 1);
@@ -136,7 +130,6 @@ function PlayTamilEvent() {
       setTimer(0);
       setUserAnswer("");
       window.scrollTo(0, 100);
-      axios.put('/connexions/update/'+allConnexions[number]._id, {winCount: allConnexions[number].winCount+1});
     } else {
       document.getElementById("toast-incorrect").style.display = "block";
       window.setTimeout(function () {
@@ -147,9 +140,13 @@ function PlayTamilEvent() {
 
   const displayAnswer = (event) => {
     event.preventDefault();
-    document.getElementById("answer-display").style.display = "block";
-    document.getElementById("bg-overlay").style.display = "block";
-    axios.put('/connexions/update/'+ allConnexions[number]._id, {lossCount: allConnexions[number].lossCount+1});
+
+    if (timer > 20) {
+      document.getElementById("answer-display").style.display = "block";
+      document.getElementById("bg-overlay").style.display = "block";
+    } else {
+      document.getElementById("hold-on-info").style.display = "block";
+    }
   };
 
   const postAnswerDisplay = () => {
@@ -165,8 +162,8 @@ function PlayTamilEvent() {
     if (allConnexions[number - 1]) {
       if (number === allConnexions.length) {
         // document.getElementById("play-sub-head").style.display = "none";
-        // document.getElementById("play-answer").style.display = "none";
-        // document.getElementById("connect").style.display = "none";
+        document.getElementById("play-answer").style.display = "none";
+        document.getElementById("connect").style.display = "none";
         return (
           <div
             style={{
@@ -179,13 +176,12 @@ function PlayTamilEvent() {
             <h1 style={{ margin: "20px", color: "#ffffff" }}>
               That's it for now we'll add more!!!
             </h1>
-            <div
-              to='/play'
-              onClick={() => window.location.reload()}
+            <Link
+              to='/'
               className='play-again'
             >
               PLAY AGAIN
-            </div>
+            </Link>
           </div>
         );
       }
@@ -215,32 +211,10 @@ function PlayTamilEvent() {
 
   return (
     <div className='play-page'>
-      <div
-        id='bg-dark-overlay'
-        style={{ display: "block", backgroundColor: "#080808" }}
-        className='bg-overlay'
-      />
       <div id='hold-on-info' className='hold-on-info'>
         {holdOnInfo()}
       </div>
 
-      <div id='category-selection' className='category-selection'>
-        <h1>What category you wanna play in ?!</h1>
-        <div className='category-button-container'>
-          <button
-            className='category-button'
-            onClick={() => {
-              setTimer(0);
-              setCategory("TamilEvent");
-              document.getElementById("bg-dark-overlay").style.display = "none";
-              document.getElementById("category-selection").style.display =
-                "none";
-            }}
-          >
-            Tamil Event
-          </button>
-        </div>
-      </div>
       <div className='head-container'>
         <div style={{ width: "100%", boxSizing: "border-box" }}>
           <h1 id='home-head' className='home-head'>
@@ -259,6 +233,7 @@ function PlayTamilEvent() {
         />
         <Link to='/'>HOME</Link>
         <Link to='/howtoplay'>HOW TO PLAY</Link>
+        <Link to='/leaderboard'>LEADERBOARD</Link>
         <Link to='/about'>ABOUT US</Link>
       </div>
       <div className='bg-overlay' id='bg-overlay' />
@@ -296,13 +271,14 @@ function PlayTamilEvent() {
         {number === 0 && (
           <h1 className='play-page-head'>Let's Connect... Shall we ?!</h1>
         )}
-          {
-            // <h1 id='play-sub-head' className='play-sub-head'>{clue}</h1>
-          }
+
 
         {number < allConnexions.length && (
           <h1 className='play-page-head'>Connexion #{number + 1 - errorCount}</h1>
         )}
+
+        <h1 id='play-sub-head' className='play-sub-head'>{clue}</h1>
+
       </div>
 
       <div id='imgLinks' className='play-images-container'>
@@ -311,8 +287,21 @@ function PlayTamilEvent() {
         <div className='loader' id='loader' />
 
       <form id='play-form' className='play-form' onSubmit={submitHandler}>
+        <input
+          id='play-answer'
+          className='play-answer'
+          type='text'
+          placeholder='Enter your answer'
+          value={userAnswer}
+          onChange={userAnswerHandler}
+          title='Enter your answer!'
+          required
+        />
         <div id='button-container' className='button-container'>
-       {number < allConnexions.length && (
+          <button id='connect' className='answer-button' type='submit'>
+            CONNECT
+          </button>
+          {number < allConnexions.length && (
             <button
               id='show-answer'
               className='answer-button'
@@ -328,4 +317,4 @@ function PlayTamilEvent() {
   );
 }
 
-export default PlayTamilEvent;
+export default Play;
