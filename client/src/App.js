@@ -12,7 +12,6 @@ import Popup from './Components/Popup';
 import Edit from './Components/Edit/Edit';
 import EditId from './Components/Edit/EditId';
 import Leaderboard from './Components/Leaderboard';
-import PlayEvent from './Components/E-cell Event/PlayEcell'
 
 function App() {
   return (
@@ -20,7 +19,6 @@ function App() {
       <Route path="/" exact component={Home} />
       <Route path="/play" exact component={Play} />
       <Route path="/playarcade" exact component={PlayArcade} />
-      <Route path="/playecell" exact component={PlayEvent} />
       <Route path="/leaderboard" exact component={Leaderboard} />
       <Route path="/play/id/:id" exact component={PlayId} />
       <Route path="/about" exact component={About} />
