@@ -72,6 +72,17 @@ function Home() {
     document.getElementById("mode-display").style.display = "none";
   }
 
+  const playDrop = () => {
+    if(document.getElementById("play-links-arcade").style.display === "block"){
+      document.getElementById("play-links-arcade").style.display = "none";
+      document.getElementById("play-links-zen").style.display = "none";
+    }
+    else{
+      document.getElementById("play-links-arcade").style.display = "block";
+      document.getElementById("play-links-zen").style.display = "block";
+    }
+  }
+
   return (
     <div className="home">
       <Menu
@@ -98,7 +109,9 @@ function Home() {
         <Link to="/howtoplay" style={{ marginTop: "80px" }}>
           HOW TO PLAY
         </Link>
-        <Link to="/play">PLAY</Link>
+        <Link onClick={playDrop} to="#">PLAY</Link>
+        <Link id="play-links-zen" style={{display: "none", marginLeft: "20px"}} to="/play">ZEN MODE</Link>
+        <Link id="play-links-arcade" style={{display: "none", marginLeft: "20px"}} to="/playarcade">ARCADE MODE</Link>
         <Link to="/about">ABOUT US</Link>
         <Link to="/leaderboard">LEADERBOARD</Link>
       </div>

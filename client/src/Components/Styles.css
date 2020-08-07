@@ -325,8 +325,8 @@ a {
   }
   .home-nav > a {
     font-size: 22px;
-    align-self: center;
-    padding: 0;
+    align-self: flex-start;
+    padding-left: 20px;
   }
 
   .button-container-home {
