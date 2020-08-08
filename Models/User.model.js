@@ -12,7 +12,7 @@ const newUser = new Schema({
     },
     bestScore: {
         type: Array,
-        default: this.score
+        default: [this.score]
     }
 })
 

@@ -79,7 +79,8 @@ function Leaderboard() {
           <tr>
             <th>Position</th>
             <th>Name</th>
-            <th>Score</th>
+            <th>Best Score</th>
+            <th>Total Score</th>
           </tr>
           {topPlayers.map((current, index) => {
             return (
@@ -88,6 +89,7 @@ function Leaderboard() {
                 <td>
                   {current.name.charAt(0).toUpperCase() + current.name.slice(1)}
                 </td>
+                <td>{Math.max(...current.bestScore)}</td>
                 <td>{current.score}</td>
               </tr>
             );
