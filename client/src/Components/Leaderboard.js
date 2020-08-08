@@ -78,7 +78,7 @@ function Leaderboard() {
         <table className='leaderboard-table'>
           <tr>
             <th>Rank</th>
-            <th>Name</th>
+            <th colSpan={2}>Name</th>
             <th>Best Score</th>
             <th>Total Score</th>
           </tr>
@@ -86,7 +86,7 @@ function Leaderboard() {
             return (
               <tr>
                 <td>{index + 1}</td>
-                <td>
+                <td colSpan={2}>
                   {current.name.charAt(0).toUpperCase() + current.name.slice(1)}
                 </td>
                 <td>{Math.max(...current.bestScore)}</td>
