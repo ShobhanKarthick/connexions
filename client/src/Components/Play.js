@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import generateHash from "random-hash";
+import bgVideo0 from './Videos/video4.mp4'
+import bgVideo1 from './Videos/video5.mp4'
 
 function Play() {
   const [allConnexions, setAllConnexions] = useState("");
@@ -220,12 +222,17 @@ function Play() {
 
   return (
     <div className='play-page'>
-      <div
-        id='bg-dark-overlay'
-        style={{ display: "block", backgroundColor: "#080808" }}
-        className='bg-overlay'
-      />
-      <div id='hold-on-info' className='hold-on-info'>
+    <video autoPlay muted loop id="bg-video"> 
+      <source src={bgVideo1} />
+    </video>
+
+    <div
+    id='bg-dark-overlay'
+    style={{ display: "block", backgroundColor: "#080808" }}
+    className='bg-overlay'
+  />
+  
+  <div id='hold-on-info' className='hold-on-info'>
         {holdOnInfo()}
       </div>
 

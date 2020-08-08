@@ -38,6 +38,7 @@ function Play() {
   }, [])
 
   useEffect(() => {
+    document.getElementById("start-up-display").style.display = "flex"
     if (!executed) {
       setRandom(generateHash({ length: 7 }));
       setExecuted(true);
@@ -197,7 +198,6 @@ function Play() {
               That's it for now we'll add more!!!
             </h1>
             <div
-              to='/play'
               onClick={() => window.location.reload()}
               className='play-again'
             >
@@ -265,6 +265,14 @@ function Play() {
       <div id='hold-on-info' className='hold-on-info'>
         {holdOnInfo()}
       </div>
+
+      <div id='start-up-display' className='time-up-display'>
+
+      <p style={{margin: 0, fontSize: "30px", textAlign: "center", marginBottom: "20px"}}>You have got just 3 minutes !!!</p>
+      <p style={{margin: 0, fontSize: "20px", textAlign: "center", marginBottom: "20px"}}>Do as much and top the leaderboard :)</p>
+          <div style={{float: "right", padding: "10px", fontSize: "20px"}} onClick={() => {document.getElementById("start-up-display").style.display = "none"; setTimer(0)}}>Cool</div>
+      </div>
+
       <div id='time-up-display' className='time-up-display'>
         <h1>TIME UP !!!</h1>
         <Timer />
