@@ -77,7 +77,7 @@ function Leaderboard() {
         <h1>Top 10 Connectors</h1>
         <table className='leaderboard-table'>
           <tr>
-            <th>Position</th>
+            <th>Rank</th>
             <th>Name</th>
             <th>Best Score</th>
             <th>Total Score</th>

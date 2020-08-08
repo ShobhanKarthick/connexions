@@ -9,6 +9,8 @@ import bgVideo1 from './Videos/video5.mp4'
 function Play() {
   const [allConnexions, setAllConnexions] = useState("");
   const [user, setUser] = useState('')
+  const [bestScore, setBestScore] = useState([])
+  const [gameScore, setGameScore] = useState(0)
   const [score, setScore] = useState(0)
   const [userAnswer, setUserAnswer] = useState("");
   const [number, setNumber] = useState(0);
@@ -29,6 +31,7 @@ function Play() {
         let user = response.data
         setUser(user[0])
         setScore(user[0].score)
+        setBestScore(user[0].bestScore)
     })
     .catch(err => console.log(err))
     }
@@ -64,7 +67,10 @@ function Play() {
       }
     }
   
-    if(timer > 180){
+    if(timer === 180){        
+      bestScore.push(gameScore)
+      axios.put('/users/update/' + user._id, {bestScore: bestScore})
+      console.log(bestScore)
       document.getElementById("time-up-display").style.display = "flex"
       document.getElementById("bg-overlay").style.display = "block"
     }
@@ -101,7 +107,10 @@ function Play() {
     return () => {
       if (window.location.pathname === "/") {
         console.log("back");
+        bestScore.push(gameScore)
+        console.log(bestScore)
         history.push("/leaderboard");
+        axios.put('/users/update/' + user._id, {bestScore: bestScore})
       }
     };
   }, [history]);
@@ -160,6 +169,7 @@ function Play() {
 
       setNumber(number + 1);
       setScore(score + 1);
+      setGameScore(gameScore + 1)
       setUserAnswer("");
       window.scrollTo(0, 100);
       axios.put('/connexions/update/'+allConnexions[number]._id, {winCount: allConnexions[number].winCount+1})

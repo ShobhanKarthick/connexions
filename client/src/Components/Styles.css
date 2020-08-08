@@ -1257,6 +1257,7 @@ a {
   text-align: center;
   padding: 10px;
   box-sizing: border-box;
+  table-layout: fixed;
 }
 
 .leaderboard-table th, td{
@@ -1265,6 +1266,7 @@ a {
   color: #ffffff;
   padding: 10px;
   box-sizing: border-box;
+  word-break: break-word;
 }
 
 .leaderboard-table th{
@@ -1278,10 +1280,10 @@ a {
 
 @media only screen and (max-width: 600px) {
   .table-container{
-    width: 90%;
+    width: 100%;
   }
   .leaderboard-table th, td{
-    font-size: 20px;
+    font-size: 15px;
   }
 
 }

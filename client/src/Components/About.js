@@ -60,6 +60,7 @@ function About() {
         >
           ARCADE MODE
         </Link>{" "}
+        <Link to="/leaderboard">LEADERBOARD</Link>
       </div>
 
       <fieldset className='about-container'>
