@@ -88,7 +88,7 @@ connexionRoutes.route('/update/:id').put((req, res, next) => {
 })
 
 userRoutes.route("/topten").get((req, res) => {
-	User.find().sort({score: -1}).limit(10)
+	User.find().sort({bestScore: -1}).limit(10)
 		.then(users => {
 			res.status(200).json(users)
 		})
