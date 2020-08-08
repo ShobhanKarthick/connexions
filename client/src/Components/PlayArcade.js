@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import generateHash from "random-hash";
+import bgVideo1 from './Videos/video5.mp4'
 
 function Play() {
   const [allConnexions, setAllConnexions] = useState("");
@@ -262,6 +263,11 @@ function Play() {
 
   return (
     <div className='play-page'>
+
+    <video autoPlay muted loop id="bg-video"> 
+    <source src={bgVideo1} />
+  </video>
+
       <div id='hold-on-info' className='hold-on-info'>
         {holdOnInfo()}
       </div>
