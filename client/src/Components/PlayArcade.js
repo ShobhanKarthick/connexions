@@ -43,6 +43,7 @@ function Play() {
 
   useEffect(() => {
     document.getElementById("start-up-display").style.display = "flex"
+    document.getElementById("bg-med-overlay").style.display = "block"
     if (!executed) {
       setRandom(generateHash({ length: 7 }));
       setExecuted(true);
@@ -64,9 +65,15 @@ function Play() {
       if(document.getElementById("loader")){
 
         document.getElementById("loader").style.display = "none";
+        document.getElementById("timer-field").style.display = "block";
       }
     }
-  
+    else{
+      if(document.getElementById("timer-field")){
+      document.getElementById("timer-field").style.display = "none";
+      }
+    }  
+    
     if(timer === 180){        
       bestScore.push(gameScore)
       axios.put('/users/update/' + user._id, {bestScore: bestScore})
@@ -281,12 +288,12 @@ function Play() {
       <div id='hold-on-info' className='hold-on-info'>
         {holdOnInfo()}
       </div>
-
+      <div className="bg-med-overlay" id="bg-med-overlay" />
       <div id='start-up-display' className='time-up-display'>
 
       <p style={{margin: 0, fontSize: "30px", textAlign: "center", marginBottom: "20px"}}>You have got just 3 minutes !!!</p>
       <p style={{margin: 0, fontSize: "20px", textAlign: "center", marginBottom: "20px"}}>Do as much and top the leaderboard :)</p>
-          <div style={{float: "right", padding: "10px", fontSize: "20px"}} onClick={() => {document.getElementById("start-up-display").style.display = "none"; setTimer(0)}}>Cool</div>
+          <div style={{float: "right", padding: "10px", fontSize: "20px"}} onClick={() => {document.getElementById("start-up-display").style.display = "none"; document.getElementById("bg-med-overlay").style.display = "none";setTimer(0)}}>Cool</div>
       </div>
 
       <div id='time-up-display' className='time-up-display'>
@@ -346,7 +353,7 @@ function Play() {
         <p id="timer-field" style={{backgroundColor: "#ff0000", padding: "10px", borderRadius: "3px", margin: "5px"}}>
         Your last {humanizeDuration(((180 - timer) * 1000),{delimiter: "  "})} 
         </p> :
-        <p style={{backgroundColor: "#4ca541", padding: "10px", borderRadius: "3px", margin: "5px"}}>
+        <p id="timer-field" style={{backgroundColor: "#4ca541", padding: "10px", borderRadius: "3px", margin: "5px"}}>
         {humanizeDuration(((180 - timer) * 1000),{delimiter: "  "})} left
         </p>
       }
